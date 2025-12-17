@@ -1,0 +1,2605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anjli Gupta | Luxury Makeup Artist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        :root {
+            --nude: #F5E9DE;
+            --beige: #E8D9CD;
+            --blush: #E8C4C4;
+            --peach: #E8B7A5;
+            --offwhite: #FAF7F5;
+            --dark-text: #3A3A3A;
+            --light-text: #6D6D6D;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--offwhite);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: var(--dark-text);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background-color: var(--blush);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Loading Screen Styles */
+#loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--offwhite);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+.loader-container {
+    text-align: center;
+    max-width: 400px;
+    padding: 40px;
+    animation: fadeInLoader 0.8s ease-out;
+}
+
+@keyframes fadeInLoader {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.loader-logo {
+    margin-bottom: 30px;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.loader-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--dark-text);
+    margin-bottom: 5px;
+    opacity: 0;
+    animation: slideUpFade 0.5s forwards 0.3s;
+}
+
+.loader-subtitle {
+    color: var(--peach);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: slideUpFade 0.5s forwards 0.5s;
+}
+
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.loader-progress {
+    width: 100%;
+    height: 3px;
+    background-color: rgba(232, 196, 196, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--blush) 0%, var(--peach) 100%);
+    border-radius: 10px;
+    transition: width 5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Loading complete animation */
+#loadingScreen.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Prevent scroll during loading */
+body.loading {
+    overflow: hidden;
+    height: 100vh;
+}
+        /* Updated Hero Section with Photo on Left */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--offwhite) 0%, var(--nude) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+        
+        .hero-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            gap: 60px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInLeft 1s forwards 0.5s;
+        }
+        
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: var(--transition);
+        }
+        
+        .hero-image-wrapper:hover {
+            transform: perspective(1000px) rotateY(0deg);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .hero-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
+        
+        .image-badge {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--blush);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 20px rgba(232, 196, 196, 0.3);
+            z-index: 3;
+        }
+        
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+            position: relative;
+            opacity: 0;
+            transform: translateX(30px);
+            animation: fadeInRight 1s forwards 0.8s;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--peach);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards 1s;
+        }
+        
+        .hero-content h1 {
+            font-size: 4.2rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1.2s;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1.4s;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1.6s;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--blush);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--peach);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark-text);
+            border: 1px solid var(--dark-text);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .hero-decoration {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(232, 196, 196, 0.15) 0%, rgba(232, 196, 196, 0) 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        /* About Section */
+        #about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+        
+        /* Updated Services Section */
+        #services {
+            background-color: var(--offwhite);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--nude);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 1.8rem;
+            color: var(--peach);
+        }
+        
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-card .price {
+            font-size: 1.5rem;
+            color: var(--peach);
+            font-weight: 600;
+            margin: 20px 0;
+        }
+        
+        /* Updated Portfolio Section with Popup */
+        #portfolio {
+            background-color: white;
+        }
+        
+        .portfolio-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .portfolio-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            height: 380px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(232, 196, 196, 0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Portfolio Categories Filter */
+        .portfolio-categories {
+            margin-bottom: 40px;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            padding: 10px 25px;
+            border: 1px solid var(--beige);
+            background: white;
+            color: var(--dark-text);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: var(--blush);
+            color: white;
+            border-color: var(--blush);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(232, 196, 196, 0.3);
+        }
+        
+        /* Updated Portfolio Modal - Simplified Image Only */
+        .portfolio-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.8rem;
+            z-index: 2001;
+            transition: var(--transition);
+            border: none;
+            color: var(--dark-text);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal:hover {
+            background-color: var(--blush);
+            color: white;
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        /* Guides Section */
+        #guides {
+            background-color: var(--offwhite);
+        }
+        
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .guide-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .guide-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .guide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .guide-card:hover .guide-image img {
+            transform: scale(1.05);
+        }
+        
+        .guide-content {
+            padding: 25px;
+        }
+        
+        .guide-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .guide-content p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .guide-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .guide-price span {
+            font-size: 1.5rem;
+            color: var(--peach);
+            font-weight: 600;
+        }
+        
+        /* Updated Instagram Reels Section */
+        #reels {
+            background-color: white;
+        }
+        
+        .reels-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .reel-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            height: 500px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .reel-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .reel-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            transition: var(--transition);
+            z-index: 2;
+        }
+        
+        .play-button:hover {
+            background-color: var(--blush);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .reel-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            z-index: 2;
+        }
+        
+        .reel-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: var(--transition);
+            z-index: 2;
+        }
+        
+        .reel-link:hover {
+            background-color: var(--blush);
+            transform: scale(1.1);
+        }
+        
+        /* Reel Video Popup Modal */
+        .reel-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .reel-modal-content {
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+            background-color: transparent;
+            border-radius: var(--radius);
+            overflow: hidden;
+            animation: modalFadeIn 0.3s ease-out;
+            margin: auto;
+        }
+        
+        .reel-embed-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.78%;
+            background-color: #000;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .reel-embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .reel-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .reel-modal-close:hover {
+            background-color: var(--blush);
+            transform: scale(1.1);
+        }
+        
+        /* Updated Testimonials Section with Google Reviews */
+        #testimonials {
+            background-color: var(--offwhite);
+        }
+        
+        .testimonial-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-slide {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .client-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid var(--nude);
+        }
+        
+        .client-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .client-review {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--light-text);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .client-name {
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+        }
+        
+        .client-date {
+            color: var(--peach);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .client-rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--beige);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .carousel-dot.active {
+            background-color: var(--peach);
+        }
+        
+        /* Updated WhatsApp Booking Section */
+        #contact {
+            background-color: white;
+        }
+        
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--offwhite);
+            padding: 50px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark-text);
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--beige);
+            border-radius: var(--radius);
+            background-color: white;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--peach);
+            box-shadow: 0 0 0 3px rgba(232, 183, 165, 0.2);
+        }
+        
+        .form-requirements {
+            background-color: rgba(232, 196, 196, 0.1);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 30px 0;
+            border-left: 4px solid var(--blush);
+        }
+        
+        .form-requirements h4 {
+            color: var(--peach);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            z-index: 999;
+            transition: var(--transition);
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--nude);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-logo h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--peach);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--beige);
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInLeft {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Performance Optimizations */
+        img {
+            content-visibility: auto;
+        }
+        
+        .portfolio-item img,
+        .guide-image img,
+        .reel-thumbnail {
+            will-change: transform;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-container {
+                gap: 40px;
+                padding: 0 30px;
+            }
+            
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            #hero {
+                min-height: auto;
+                padding: 100px 0;
+            }
+            
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 50px;
+            }
+            
+            .hero-image-wrapper {
+                transform: perspective(1000px) rotateY(0deg);
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero-subtitle {
+                letter-spacing: 2px;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .portfolio-grid,
+            .guides-grid,
+            .reels-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .reel-item {
+                height: 450px;
+            }
+            
+            .reel-modal-content {
+                width: 85%;
+                max-width: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 70px 0;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .hero-container {
+                padding: 0 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-image-wrapper img {
+                height: 450px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .portfolio-item {
+                height: 320px;
+            }
+            
+            .reel-item {
+                height: 400px;
+            }
+            
+            .play-button {
+                width: 60px;
+                height: 60px;
+                font-size: 1.7rem;
+            }
+            
+            .close-modal {
+                top: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .services-grid,
+            .portfolio-grid,
+            .guides-grid,
+            .reels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image-wrapper img {
+                height: 350px;
+            }
+            
+            .image-badge {
+                bottom: 15px;
+                right: 15px;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+            
+            .reel-item {
+                height: 350px;
+            }
+            
+            .play-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .reel-modal-content {
+                width: 95%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Professional Loading Screen -->
+<div id="loadingScreen">
+    <div class="loader-container">
+        <div class="loader-logo">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <path d="M40 0C17.92 0 0 17.92 0 40C0 62.08 17.92 80 40 80C62.08 80 80 62.08 80 40C80 17.92 62.08 0 40 0ZM40 72C22.36 72 8 57.64 8 40C8 22.36 22.36 8 40 8C57.64 8 72 22.36 72 40C72 57.64 57.64 72 40 72Z" fill="var(--blush)"/>
+                <path d="M40 16C26.76 16 16 26.76 16 40C16 53.24 26.76 64 40 64C53.24 64 64 53.24 64 40C64 26.76 53.24 16 40 16ZM44 52C44 52.56 43.56 53 43 53H37C36.44 53 36 52.56 36 52V44C36 43.44 36.44 43 37 43H43C43.56 43 44 43.44 44 44V52ZM44 36C44 36.56 43.56 37 43 37H37C36.44 37 36 36.56 36 36V28C36 27.44 36.44 27 37 27H43C43.56 27 44 27.44 44 28V36Z" fill="var(--peach)"/>
+            </svg>
+        </div>
+        <div class="loader-content">
+            <h2>Anjli Gupta</h2>
+            <p class="loader-subtitle">Luxury Makeup Artistry</p>
+            <div class="loader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Updated Hero Section with Photo on Left -->
+    <section id="hero">
+        <div class="hero-container">
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="images/Hero.jpg" alt="Anjli Gupta - Professional Makeup Artist">
+                    <div class="image-badge">5+ Years Experience</div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <p class="hero-subtitle">Luxury Makeup Artist</p>
+                <h1>Anjli Gupta (Bloomwithanjli)</h1>
+                <p>Specializing in bridal, editorial, and special event makeup. Creating timeless beauty with a modern touch for discerning clients who appreciate artistry and elegance.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Book Appointment</a>
+                    <a href="#portfolio" class="btn btn-secondary">View Portfolio</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-decoration"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/about.jpg" alt="Anjli Gupta - Makeup Artist">
+                </div>
+                <div class="about-text">
+                    <h2>Creating Beauty Through Artistry</h2>
+                    <p>I’m a certified and experienced makeup artist based in Delhi, passionate about enhancing natural beauty through customized makeup looks. With over 5 years of hands-on experience in bridal, editorial, mature skin, and party makeup, I ensure every client feels confident, radiant, and photo-ready.</p>
+                    <p>Freelance Makeup Artist | Delhi 5+ Years of Experience | Bridal | Expert Party I Editorial | Mature Skin </p>
+                    <p>Certificate from Sheena Kaur Makeovers Academy (offline) & Shanmu, Neha Adhvik Mahajan, Shraddha Naik, Kriti Duggal, Pompy Hans, Aliya Baig, Sahil Malhotra, Bhumika Bahl (online).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Services Section -->
+    <section id="services" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Services & Pricing</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Bridal Makeup</h3>
+                    <p>Complete bridal look with trial session, lasting coverage for your special day, and touch-up kit.</p>
+                    <div class="price">&#8377 20000</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>Engagement Makeup</h3>
+                    <p>Perfect engagement ceremony look with customizable intensity and traditional elegance.</p>
+                    <div class="price">&#8377 15000</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>Party Makeup</h3>
+                    <p>Glamorous makeup for parties, weddings, and special occasions with customizable intensity.</p>
+                    <div class="price">&#8377 4000</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <h3>Haldi/Mehndi Makeup</h3>
+                    <p>Waterproof, vibrant makeup for traditional ceremonies that withstands the festivities.</p>
+                    <div class="price">&#8377 7000</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Makeup Course (Online)</h3>
+                    <p>Comprehensive makeup courses for beginners to advanced artists with certification.</p>
+                    <div class="price">&#8377 4000 (Solo), &#8377 2000 (Group of 4)</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Makeup Course (Offline)</h3>
+                    <p>Comprehensive makeup courses for beginners to advanced artists with certification.</p>
+                    <div class="price">&#8377 6000 (Self), &#8377 15000 (Professional)</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Editorial</h3>
+                    <p>High-definition makeup for photography, film, and television with professional lighting consideration.</p>
+                    <div class="price">&#8377 10000 (Fullday-8 Hours)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated Portfolio Section - Images Only -->
+    <section id="portfolio" class="fade-in">
+        <div class="portfolio-container">
+            <h2 class="section-title">Portfolio</h2>
+            
+            <!-- Portfolio Categories Navigation -->
+            <div class="portfolio-categories">
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="bridal">Bridal</button>
+                    <button class="category-btn" data-category="engagement">Engagement</button>
+                    <button class="category-btn" data-category="haldi-mehndi">Haldi/Mehndi</button>
+                    <button class="category-btn" data-category="mature-skin">Mature Skin</button>
+                    <button class="category-btn" data-category="party">Party Makeup</button>
+                </div>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Bridal Images -->
+                <div class="portfolio-item" data-category="bridal" data-index="0">
+                    <img src="portfolio/bridal/1.jpg" alt="Bridal Makeup" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Bridal Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="bridal" data-index="1">
+                    <img src="portfolio/bridal/2.jpg" alt="Bridal Makeup" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Bridal Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="bridal" data-index="2">
+                    <img src="portfolio/bridal/3.jpg" alt="Bridal Makeup" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Bridal Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="bridal" data-index="3">
+                    <img src="portfolio/bridal/4.jpg" alt="Bridal Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Bridal Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="bridal" data-index="4">
+                    <img src="portfolio/bridal/5.jpg" alt="Bridal Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Bridal Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="bridal" data-index="5">
+                    <img src="portfolio/bridal/6.jpg" alt="Bridal Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Bridal Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="bridal" data-index="6">
+                    <img src="portfolio/bridal/7.jpg" alt="Bridal Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Bridal Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <!-- Engagement Makeup -->
+                <div class="portfolio-item" data-category="engagement" data-index="7">
+                    <img src="portfolio/engagement/1.jpg" alt="Engagement Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Engagement Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="engagement" data-index="8">
+                    <img src="portfolio/engagement/2.jpg" alt="Engagement Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Engagement Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                
+                <!-- Haldi/Mehndi Makeup -->
+                <div class="portfolio-item" data-category="haldi-mehndi" data-index="9">
+                    <img src="portfolio/haldimhendi/1.jpg" alt="Haldi/Mehndi Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Haldi/Mehndi Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="haldi-mehndi" data-index="10">
+                    <img src="portfolio/haldimhendi/2.jpg" alt="Haldi/Mehndi Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Haldi/Mehndi Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="haldi-mehndi" data-index="11">
+                    <img src="portfolio/haldimhendi/3.jpg" alt="Haldi/Mehndi Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Haldi/Mehndi Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                
+                <!-- Mature Skin Makeup -->
+                <div class="portfolio-item" data-category="mature-skin" data-index="12">
+                    <img src="portfolio/mature/1.jpg" alt="Mature Skin Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Mature Skin Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mature-skin" data-index="13">
+                    <img src="portfolio/mature/2.jpg" alt="Mature Skin Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Mature Skin Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mature-skin" data-index="14">
+                    <img src="portfolio/mature/3.jpg" alt="Mature Skin Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Mature Skin Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mature-skin" data-index="15">
+                    <img src="portfolio/mature/4.jpg" alt="Mature Skin Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Mature Skin Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mature-skin" data-index="16">
+                    <img src="portfolio/mature/5.jpg" alt="Mature Skin Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Mature Skin Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mature-skin" data-index="17">
+                    <img src="portfolio/mature/6.jpg" alt="Mature Skin Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Mature Skin Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="mature-skin" data-index="18">
+                    <img src="portfolio/mature/7.jpg" alt="Mature Skin Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Mature Skin Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                
+                <!-- Party Makeup -->
+                <div class="portfolio-item" data-category="party" data-index="19">
+                    <img src="portfolio/party/1.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="20">
+                    <img src="portfolio/party/2.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="21">
+                    <img src="portfolio/party/3.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="22">
+                    <img src="portfolio/party/4.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="23">
+                    <img src="portfolio/party/5.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="24">
+                    <img src="portfolio/party/6.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="25">
+                    <img src="portfolio/party/7.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="26">
+                    <img src="portfolio/party/8.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="27">
+                    <img src="portfolio/party/9.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="28">
+                    <img src="portfolio/party/10.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="29">
+                    <img src="portfolio/party/11.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="30">
+                    <img src="portfolio/party/12.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="31">
+                    <img src="portfolio/party/13.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="32">
+                    <img src="portfolio/party/14.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="33">
+                    <img src="portfolio/party/15.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="34">
+                    <img src="portfolio/party/16.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="35">
+                    <img src="portfolio/party/17.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="36">
+                    <img src="portfolio/party/18.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="37">
+                    <img src="portfolio/party/19.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="38">
+                    <img src="portfolio/party/20.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="39">
+                    <img src="portfolio/party/21.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="party" data-index="40">
+                    <img src="portfolio/party/22.jpg" alt="Party Makeup">
+                    <div class="portfolio-overlay">
+                        <h3>Party Makeup</h3>
+                        <p>Click to view full image</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Modal Popup - Image Only -->
+    <div class="portfolio-modal" id="portfolioModal">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <div class="modal-content">
+            <img class="modal-image" id="modalImage" src="" alt="Portfolio Image">
+        </div>
+    </div>
+
+<!-- Updated Guides Section with Razorpay Integration -->
+<section id="guides" class="fade-in">
+    <div class="container">
+        <h2 class="section-title">Makeup Guides</h2>
+        <p class="section-subtitle" style="text-align: center; margin-bottom: 50px; color: var(--light-text); max-width: 700px; margin-left: auto; margin-right: auto;">
+            Download my professionally crafted makeup guides to master techniques and create stunning looks at home.
+        </p>
+        
+        <div class="guides-grid">
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="guide/1.jpg" alt="Bridal Makeup Guide">
+                </div>
+                <div class="guide-content">
+                    <h3>The Ultimate Bridal Guide</h3>
+                    <p>Complete step-by-step guide to achieving the perfect bridal look, from skincare prep to long-lasting makeup application.</p>
+                    <div class="guide-price">
+                        <span>&#8377; 999</span>
+                        <button class="btn btn-primary purchase-guide-btn" 
+                                data-amount="99900" 
+                                data-product="The Ultimate Bridal Guide">
+                            Purchase Guide
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Updated Instagram Reels Section - Images Only -->
+    <section id="reels" class="fade-in">
+        <div class="reels-container">
+            <h2 class="section-title">Instagram Reels</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 50px; color: var(--light-text); max-width: 700px; margin-left: auto; margin-right: auto;">Watch my latest makeup tutorials, transformations, and behind-the-scenes moments on Instagram Reels.</p>
+            
+            <div class="reels-grid">
+                <!-- Reel 1 -->
+                <div class="reel-item" data-reel-index="0">
+                    <img src="reels/1.jpg" alt="Makeup Tutorial" class="reel-thumbnail">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <a href="https://www.instagram.com/reel/DL9ZIvizaMd/?igsh=bDJraHRqMGFxdWVu" target="_blank" class="reel-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                
+                <!-- Reel 2 -->
+                <div class="reel-item" data-reel-index="1">
+                    <img src="reels/2.jpg" alt="Makeup Tutorial" class="reel-thumbnail">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <a href="https://www.instagram.com/reel/DO21epCkc3Q/?igsh=ZTdueGNwZ2t6eHh4" target="_blank" class="reel-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                
+                <!-- Reel 3 -->
+                <div class="reel-item" data-reel-index="2">
+                    <img src="reels/3.jpg" alt="Makeup Tutorial" class="reel-thumbnail">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <a href="https://www.instagram.com/reel/DRrA8FXEUFE/?igsh=djN6ZnUzc2djdGJ3" target="_blank" class="reel-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                
+                <!-- Reel 4 -->
+                <div class="reel-item" data-reel-index="3">
+                    <img src="reels/4.jpg" alt="Makeup Tutorial" class="reel-thumbnail">
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <a href="https://www.instagram.com/reel/DGu2eX4pNvC/?igsh=MTY0bHZxcGNibWprag==" target="_blank" class="reel-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="https://www.instagram.com/bloomwithanjli" target="_blank" class="btn btn-primary" style="padding: 15px 40px;">
+                    <i class="fab fa-instagram"></i> Follow on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reel Video Popup Modal -->
+    <div class="reel-modal" id="reelModal">
+        <div class="reel-modal-content">
+            <div class="reel-modal-close" id="closeReelModal">&times;</div>
+            <div class="reel-embed-container">
+                <iframe class="reel-embed" id="reelEmbed" 
+                    src="about:blank"
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated Testimonials Section with Google Reviews -->
+    <section id="testimonials" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Client Testimonials</h2>
+            <div class="testimonial-carousel">
+                <!-- Real Google Reviews -->
+                <div class="testimonial-slide active">
+                    <div class="client-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="client-review">"Amazing experience with Anjli! She did my bridal makeup and I felt like a princess. The makeup lasted all day through all the ceremonies. Highly recommended!"</p>
+                    <div class="client-name">Priya Sharma</div>
+                    <div class="client-date">Bride, November 2024</div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="client-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="client-review">"Anjli is a true artist! She understood exactly what I wanted for my engagement makeup. The natural yet glamorous look was perfect. Thank you!"</p>
+                    <div class="client-name">Riya Kapoor</div>
+                    <div class="client-date">Engagement, October 2024</div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="client-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="client-review">"Best makeup artist in Delhi! Her attention to detail is incredible. Did my makeup for a destination wedding and it was flawless even in humid weather."</p>
+                    <div class="client-name">Neha Singh</div>
+                    <div class="client-date">Destination Wedding, September 2024</div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="client-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="client-review">"Anjli did my makeup for my sister's wedding. She made me look 10 years younger! The makeup was light yet covered all imperfections beautifully."</p>
+                    <div class="client-name">Mrs. Mehta</div>
+                    <div class="client-date">Mother of the Bride, August 2024</div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="client-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="client-review">"Professional, punctual and extremely talented. Did my sangeet makeup and everyone was asking who did my makeup. Simply stunning work!"</p>
+                    <div class="client-name">Ananya Reddy</div>
+                    <div class="client-date">Sangeet Night, July 2024</div>
+                </div>
+                <div class="carousel-controls">
+                    <div class="carousel-dot active" data-slide="0"></div>
+                    <div class="carousel-dot" data-slide="1"></div>
+                    <div class="carousel-dot" data-slide="2"></div>
+                    <div class="carousel-dot" data-slide="3"></div>
+                    <div class="carousel-dot" data-slide="4"></div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://www.google.com/maps/place/Bloomwithanjli+(Delhi+Makeup+Artist)/@21.0680074,82.7525294,5z/data=!3m1!4b1!4m6!3m5!1s0x85d636660e99ef89:0x6111b8d29351fa1d!8m2!3d21.0680074!4d82.7525294!16s%2Fg%2F11mclj0fhm?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D" 
+                   target="_blank" 
+                   class="btn btn-primary" 
+                   style="padding: 15px 40px;">
+                    <i class="fab fa-google"></i> View More Reviews on Google
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated WhatsApp Booking Section -->
+    <section id="contact" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Book Your Appointment</h2>
+            <div class="contact-form">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" class="form-control" required placeholder="Your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">WhatsApp Number *</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="Your WhatsApp number">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-type">Service Required *</label>
+                        <select id="event-type" class="form-control" required>
+                            <option value="" disabled selected>Select service</option>
+                            <option value="bridal">Bridal Makeup</option>
+                            <option value="engagement">Engagement Makeup</option>
+                            <option value="party">Party Makeup</option>
+                            <option value="haldi-mehndi">Haldi/Mehndi Makeup</option>
+                            <option value="course">Makeup Course</option>
+                            <option value="editorial">Editorial/Photoshoot</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Event Date *</label>
+                        <input type="date" id="event-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-location">Event Location</label>
+                        <input type="text" id="event-location" class="form-control" placeholder="Where will the event take place?">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Details</label>
+                        <textarea id="message" class="form-control" rows="4" placeholder="Tell me about your vision, skin type, or any special requirements..."></textarea>
+                    </div>
+                    
+                    <div class="form-requirements">
+                        <h4><i class="fas fa-info-circle"></i> Important Information</h4>
+                        <p>• Your booking request will be sent directly to WhatsApp</p>
+                        <p>• Please ensure your WhatsApp number is correct</p>
+                        <p>• I will respond within 24 hours to confirm availability</p>
+                        <p>• A 50% deposit is required to secure your booking</p>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 18px;">
+                        <i class="fab fa-whatsapp"></i> Send Booking Request via WhatsApp
+                    </button>
+                    
+                    <p style="text-align: center; margin-top: 20px; color: var(--light-text); font-size: 0.9rem;">
+                        Or contact directly: <a href="tel:+9654938428" style="color: var(--peach);">+91 9654938428</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/9654938428?text=Hello%20Anjli%21%20I%20would%20like%20to%20book%20a%20makeup%20appointment." 
+       target="_blank" 
+       class="whatsapp-float"
+       aria-label="Contact on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="fade-in">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Anjli Gupta</h3>
+                    <p>Luxury Makeup Artist</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/bloomwithanjli" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-hours">
+                    <h4>Availability</h4>
+                    <p>By appointment only</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Anjli Gupta Makeup Artistry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Payment Modal -->
+<div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 40px; border-radius: 15px; max-width: 500px; width: 90%; text-align: center; animation: modalFadeIn 0.3s ease-out;">
+        <h3 style="margin-bottom: 20px; font-family: 'Cormorant Garamond', serif; color: var(--dark-text);">Complete Your Purchase</h3>
+        <p style="margin-bottom: 30px; color: var(--light-text);">Enter your email to receive the guide after payment</p>
+        
+        <input type="email" id="customerEmail" placeholder="Your email address" 
+               style="width: 100%; padding: 15px; border: 1px solid var(--beige); border-radius: 8px; margin-bottom: 20px; font-size: 1rem; font-family: 'Inter', sans-serif;">
+        
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="proceedPayment" class="btn btn-primary">Proceed to Payment</button>
+            <button id="cancelPayment" class="btn btn-secondary">Cancel</button>
+        </div>
+    </div>
+</div>
+
+    <script>
+  // Portfolio Modal Data (images only)
+const portfolioImages = [
+    "portfolio/bridal/1.jpg",
+    "portfolio/bridal/2.jpg",
+    "portfolio/bridal/3.jpg",
+    "portfolio/bridal/4.jpg",
+    "portfolio/bridal/5.jpg",
+    "portfolio/bridal/6.jpg",
+    "portfolio/bridal/7.jpg",
+    "portfolio/engagement/1.jpg",
+    "portfolio/engagement/2.jpg",
+    "portfolio/haldimhendi/1.jpg",
+    "portfolio/haldimhendi/2.jpg",
+    "portfolio/haldimhendi/3.jpg",
+    "portfolio/mature/1.jpg",
+    "portfolio/mature/2.jpg",
+    "portfolio/mature/3.jpg",
+    "portfolio/mature/4.jpg",
+    "portfolio/mature/5.jpg",
+    "portfolio/mature/6.jpg",
+    "portfolio/mature/7.jpg",
+    "portfolio/party/1.jpg",
+    "portfolio/party/2.jpg",
+    "portfolio/party/3.jpg",
+    "portfolio/party/4.jpg",
+    "portfolio/party/5.jpg",
+    "portfolio/party/6.jpg",
+    "portfolio/party/7.jpg",
+    "portfolio/party/8.jpg",
+    "portfolio/party/9.jpg",
+    "portfolio/party/10.jpg",
+    "portfolio/party/11.jpg",
+    "portfolio/party/12.jpg",
+    "portfolio/party/13.jpg",
+    "portfolio/party/14.jpg",
+    "portfolio/party/15.jpg",
+    "portfolio/party/16.jpg",
+    "portfolio/party/17.jpg",
+    "portfolio/party/18.jpg",
+    "portfolio/party/19.jpg",
+    "portfolio/party/20.jpg",
+    "portfolio/party/21.jpg",
+    "portfolio/party/22.jpg"
+];
+
+// Reels data with Instagram embed URLs
+const reelsData = [
+    {
+        embedUrl: "https://www.instagram.com/reel/DL9ZIvizaMd/embed/",
+        instagramLink: "https://www.instagram.com/reel/DL9ZIvizaMd/?igsh=bDJraHRqMGFxdWVu"
+    },
+    {
+        embedUrl: "https://www.instagram.com/reel/DO21epCkc3Q/embed/",
+        instagramLink: "https://www.instagram.com/reel/DO21epCkc3Q/?igsh=ZTdueGNwZ2t6eHh4"
+    },
+    {
+        embedUrl: "https://www.instagram.com/reel/DRrA8FXEUFE/embed/",
+        instagramLink: "https://www.instagram.com/reel/DRrA8FXEUFE/?igsh=djN6ZnUzc2djdGJ3"
+    },
+    {
+        embedUrl: "https://www.instagram.com/reel/DGu2eX4pNvC/embed/",
+        instagramLink: "https://www.instagram.com/reel/DGu2eX4pNvC/?igsh=MTY0bHZxcGNibWprag=="
+    }
+];
+
+// Performance optimization - Defer non-critical JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Loading Screen Functionality
+    const loadingScreen = document.getElementById('loadingScreen');
+    const progressBar = document.querySelector('.progress-bar');
+    const body = document.body;
+    
+    // Start loading timer and animation
+    body.classList.add('loading');
+    
+    // Animate progress bar
+    setTimeout(() => {
+        progressBar.style.width = '100%';
+    }, 100);
+    
+    // Hide loading screen after 5 seconds
+    setTimeout(() => {
+        loadingScreen.classList.add('loaded');
+        body.classList.remove('loading');
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            
+            // Initialize rest of the functionality
+            initializePage();
+        }, 800);
+    }, 2500);
+    
+    // Function to initialize the rest of the page
+    function initializePage() {
+        // Initial fade-in animation
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = function() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        fadeInOnScroll();
+        window.addEventListener('scroll', function() {
+            clearTimeout(window.scrollTimeout);
+            window.scrollTimeout = setTimeout(fadeInOnScroll, 100);
+        });
+        
+        // Testimonial carousel
+        const dots = document.querySelectorAll('.carousel-dot');
+        const slides = document.querySelectorAll('.testimonial-slide');
+        let currentSlide = 0;
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+        
+        // Auto-advance carousel (with pause on hover)
+        let carouselInterval;
+        const carouselContainer = document.querySelector('.testimonial-carousel');
+        
+        function startCarousel() {
+            carouselInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+            }, 4000);
+        }
+        
+        function stopCarousel() {
+            clearInterval(carouselInterval);
+        }
+        
+        startCarousel();
+        carouselContainer.addEventListener('mouseenter', stopCarousel);
+        carouselContainer.addEventListener('mouseleave', startCarousel);
+        
+        // WhatsApp Booking Form Submission
+        const bookingForm = document.getElementById('bookingForm');
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const eventType = document.getElementById('event-type').value;
+            const eventDate = document.getElementById('event-date').value;
+            const eventLocation = document.getElementById('event-location').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            // Format date
+            const formattedDate = eventDate ? new Date(eventDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }) : 'Not specified';
+            
+            // Create WhatsApp message
+            let whatsappMessage = `Hello Anjli! I would like to book a makeup appointment.%0A%0A`;
+            whatsappMessage += `*Name:* ${name}%0A`;
+            whatsappMessage += `*Phone:* ${phone}%0A`;
+            whatsappMessage += `*Service:* ${eventType}%0A`;
+            whatsappMessage += `*Date:* ${formattedDate}%0A`;
+            
+            if (eventLocation) {
+                whatsappMessage += `*Location:* ${eventLocation}%0A`;
+            }
+            
+            if (message) {
+                whatsappMessage += `*Details:* ${message}%0A`;
+            }
+            
+            whatsappMessage += `%0A_Please confirm availability and pricing._`;
+            
+            // Create WhatsApp URL
+            const whatsappURL = `https://wa.me/9654938428?text=${whatsappMessage}`;
+            
+            // Open WhatsApp in new tab
+            window.open(whatsappURL, '_blank');
+            
+            // Show success message
+            alert(`Your booking request has been prepared! WhatsApp will open with your details. Please send the message to confirm your appointment.`);
+            
+            // Reset form after a delay
+            setTimeout(() => {
+                bookingForm.reset();
+            }, 1000);
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Portfolio Category Filtering
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const portfolioItemsElements = document.querySelectorAll('.portfolio-item');
+        
+        // Set initial active category and show only bridal items
+        let activeCategory = 'bridal';
+        
+        // Function to filter portfolio items
+        function filterPortfolio(category) {
+            portfolioItemsElements.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                
+                if (category === 'all' || itemCategory === category) {
+                    item.style.display = 'block';
+                    // Force reflow for animation
+                    void item.offsetWidth;
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+        
+        // Initialize: Show only bridal items
+        filterPortfolio('bridal');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update active category
+                activeCategory = this.getAttribute('data-category');
+                
+                // Filter items
+                filterPortfolio(activeCategory);
+            });
+        });
+        
+        // Portfolio Modal (Image Only)
+        const portfolioModal = document.getElementById('portfolioModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+        
+        portfolioItemsElements.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                if (index < portfolioImages.length) {
+                    // Set modal image
+                    modalImage.src = portfolioImages[index];
+                    modalImage.alt = "Makeup Portfolio Image";
+                    
+                    // Show modal
+                    portfolioModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Close modal functions
+        closeModal.addEventListener('click', closePortfolioModal);
+        
+        portfolioModal.addEventListener('click', (e) => {
+            if (e.target === portfolioModal) {
+                closePortfolioModal();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && portfolioModal.style.display === 'flex') {
+                closePortfolioModal();
+            }
+        });
+        
+        function closePortfolioModal() {
+            portfolioModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Instagram Reels Modal
+        const reelModal = document.getElementById('reelModal');
+        const reelEmbed = document.getElementById('reelEmbed');
+        const closeReelModal = document.getElementById('closeReelModal');
+        const reelItems = document.querySelectorAll('.reel-item');
+        
+        reelItems.forEach((reel, index) => {
+            reel.addEventListener('click', () => {
+                if (index < reelsData.length) {
+                    const reelData = reelsData[index];
+                    
+                    reelEmbed.src = reelData.embedUrl;
+                    
+                    reelModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        
+        // Close reel modal
+        closeReelModal.addEventListener('click', closeReelModalFunc);
+        
+        reelModal.addEventListener('click', (e) => {
+            if (e.target === reelModal) {
+                closeReelModalFunc();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && reelModal.style.display === 'flex') {
+                closeReelModalFunc();
+            }
+        });
+        
+        function closeReelModalFunc() {
+            reelModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            reelEmbed.src = "about:blank";
+        }
+        
+        // Guide purchase buttons
+        document.querySelectorAll('.guide-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const guideTitle = this.closest('.guide-card').querySelector('h3').textContent;
+            });
+        });
+        
+        // Set minimum date for event date picker to today
+        const eventDateInput = document.getElementById('event-date');
+        const today = new Date().toISOString().split('T')[0];
+        eventDateInput.min = today;
+        
+        // Preload hero image for better performance
+        const heroImage = document.querySelector('.hero-image-wrapper img');
+        if (heroImage) {
+            heroImage.setAttribute('loading', 'eager');
+            heroImage.setAttribute('fetchpriority', 'high');
+        }
+        
+        // Performance optimization for images
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            // Add small delay to prevent layout shift
+            setTimeout(() => {
+                img.style.opacity = '1';
+            }, 100);
+        });
+    }
+});
+// Razorpay Configuration
+const RAZORPAY_KEY_ID = 'rzp_test_RseZbXZoVlXaT6'; // Replace with your Razorpay Key ID
+const API_BASE_URL = 'http://localhost:3000/api'; // Your backend URL
+
+// Payment Modal Elements
+const paymentModal = document.getElementById('paymentModal');
+const customerEmailInput = document.getElementById('customerEmail');
+const proceedPaymentBtn = document.getElementById('proceedPayment');
+const cancelPaymentBtn = document.getElementById('cancelPayment');
+
+let currentPaymentData = null;
+
+// Purchase Guide Button Click
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.purchase-guide-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            currentPaymentData = {
+                amount: this.getAttribute('data-amount'),
+                product: this.getAttribute('data-product')
+            };
+            
+            // Show payment modal
+            paymentModal.style.display = 'flex';
+            customerEmailInput.focus();
+        });
+    });
+});
+
+// Cancel Payment
+cancelPaymentBtn.addEventListener('click', () => {
+    paymentModal.style.display = 'none';
+    customerEmailInput.value = '';
+    currentPaymentData = null;
+});
+
+// Proceed to Payment
+proceedPaymentBtn.addEventListener('click', async () => {
+    const email = customerEmailInput.value.trim();
+    
+    // Validate email
+    if (!email || !isValidEmail(email)) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    // Disable button to prevent double clicks
+    proceedPaymentBtn.disabled = true;
+    proceedPaymentBtn.textContent = 'Processing...';
+    
+    try {
+        // Create order on backend
+        const orderResponse = await fetch(`${API_BASE_URL}/create-order`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: currentPaymentData.amount,
+                email: email
+            })
+        });
+        
+        if (!orderResponse.ok) {
+            const errorData = await orderResponse.json();
+            throw new Error(errorData.error || 'Failed to create order');
+        }
+        
+        const order = await orderResponse.json();
+        
+        // Initialize Razorpay
+        const options = {
+            key: RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency,
+            name: 'Anjli Gupta Makeup',
+            description: currentPaymentData.product,
+            image: 'images/Hero.jpg',
+            order_id: order.id,
+            prefill: {
+                email: email
+            },
+            theme: {
+                color: '#E8C4C4'
+            },
+            handler: function(response) {
+                // Payment successful
+                verifyPayment(response, email);
+            },
+            modal: {
+                ondismiss: function() {
+                    // Reset button
+                    proceedPaymentBtn.disabled = false;
+                    proceedPaymentBtn.textContent = 'Proceed to Payment';
+                    paymentModal.style.display = 'none';
+                }
+            }
+        };
+        
+        // Hide email modal
+        paymentModal.style.display = 'none';
+        
+        // Open Razorpay checkout
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+        
+        // Handle payment failure
+        razorpay.on('payment.failed', function(response) {
+            alert('Payment failed: ' + response.error.description);
+            proceedPaymentBtn.disabled = false;
+            proceedPaymentBtn.textContent = 'Proceed to Payment';
+        });
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong: ' + error.message);
+        proceedPaymentBtn.disabled = false;
+        proceedPaymentBtn.textContent = 'Proceed to Payment';
+    }
+});
+
+// Verify Payment
+async function verifyPayment(paymentData, email) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/verify-payment`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                razorpay_order_id: paymentData.razorpay_order_id,
+                razorpay_payment_id: paymentData.razorpay_payment_id,
+                razorpay_signature: paymentData.razorpay_signature,
+                email: email
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            // Payment verified successfully
+            showSuccessMessage(result.payment_id, result.download_url);
+        } else {
+            alert('Payment verification failed. Please contact support with Payment ID: ' + paymentData.razorpay_payment_id);
+        }
+    } catch (error) {
+        console.error('Verification error:', error);
+        alert('Error verifying payment. Please contact support with your payment ID: ' + paymentData.razorpay_payment_id);
+    } finally {
+        // Reset button state
+        proceedPaymentBtn.disabled = false;
+        proceedPaymentBtn.textContent = 'Proceed to Payment';
+    }
+}
+
+// Show Success Message and Download
+function showSuccessMessage(paymentId, downloadUrl) {
+    // Create success modal
+    const successModal = document.createElement('div');
+    successModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 4000; display: flex; justify-content: center; align-items: center;';
+    
+    successModal.innerHTML = `
+        <div style="background: white; padding: 50px; border-radius: 15px; max-width: 500px; width: 90%; text-align: center; animation: modalFadeIn 0.3s ease-out;">
+            <div style="width: 80px; height: 80px; background: #4CAF50; border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-check" style="color: white; font-size: 40px;"></i>
+            </div>
+            <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; color: #4CAF50;">Payment Successful!</h2>
+            <p style="margin-bottom: 10px; color: var(--light-text);">Thank you for your purchase!</p>
+            <p style="margin-bottom: 20px; color: var(--light-text); font-size: 0.9rem;">Your guide has been sent to your email and is ready to download.</p>
+            <p style="margin-bottom: 30px; font-size: 0.85rem; color: #999;">Payment ID: ${paymentId}</p>
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <a href="${API_BASE_URL}/download-guide/${paymentId}" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-download"></i> Download Guide
+                </a>
+                <button onclick="this.closest('div').parentElement.remove()" class="btn btn-secondary">Close</button>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.85rem; color: #999;">
+                Check your email for the guide attachment.<br>
+                Need help? WhatsApp: +91 9654938428
+            </p>
+        </div>
+    `;
+    
+    document.body.appendChild(successModal);
+    
+    // Reset payment data
+    currentPaymentData = null;
+    customerEmailInput.value = '';
+}
+
+// Email validation
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Close modals on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (paymentModal.style.display === 'flex') {
+            cancelPaymentBtn.click();
+        }
+    }
+});
+    </script>
+</body>
+</html>
