@@ -10,14 +10,48 @@ const app = express();
 
 // Middleware
 app.use(express.json());
+// Root health check
+app.get('/', (req, res) => {
+    res.json({ 
+        status: 'Server is running',
+        timestamp: new Date().toISOString()
+    });
+});
 
-// CORS Configuration
+// Health check
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'ok', 
+        message: 'Server is running',
+        timestamp: new Date().toISOString()
+    });
+});
+
+// CORS Configuration - Allow your Netlify domain
+const allowedOrigins = [
+    'https://bloomwithanjli.netlify.app',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+];
+
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    origin: function(origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, etc)
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) === -1) {
+            return callback(null, true); // Allow all for now
+        }
+        return callback(null, true);
+    },
+    methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
+    optionsSuccessStatus: 200
 }));
+
+// Handle preflight requests explicitly
+app.options('*', cors());
 
 // Handle preflight requests
 app.use((req, res, next) => {
