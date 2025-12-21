@@ -205,23 +205,57 @@ app.get('/api/download-guide/:paymentId', async (req, res) => {
     try {
         const { paymentId } = req.params;
 
-        // Verify payment exists and is successful
-        const payment = await razorpay.payments.fetch(paymentId);
+        console.log('Download requested for payment:', paymentId);
 
-        if (payment.status !== 'captured') {
-            return res.status(403).json({
-                error: 'Payment not completed'
+        // Verify payment exists and is successful
+        try {
+            const payment = await razorpay.payments.fetch(paymentId);
+            console.log('Payment status:', payment.status);
+
+            if (payment.status !== 'captured') {
+                return res.status(403).json({
+                    error: 'Payment not completed'
+                });
+            }
+        } catch (fetchError) {
+            console.error('Error fetching payment:', fetchError);
+            return res.status(404).json({
+                error: 'Payment not found'
             });
         }
 
         // Serve the PDF file
         const filePath = path.join(__dirname, '../frontend/guide/Makeupguide.pdf');
-        res.download(filePath, 'Ultimate-Bridal-Makeup-Guide.pdf');
+        
+        console.log('Serving file from:', filePath);
+        
+        // Check if file exists
+        const fs = require('fs');
+        if (!fs.existsSync(filePath)) {
+            console.error('File not found at:', filePath);
+            return res.status(404).json({
+                error: 'Guide file not found'
+            });
+        }
+
+        // Set headers for download
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'attachment; filename="Ultimate-Bridal-Makeup-Guide.pdf"');
+        
+        res.download(filePath, 'Ultimate-Bridal-Makeup-Guide.pdf', (err) => {
+            if (err) {
+                console.error('Download error:', err);
+                if (!res.headersSent) {
+                    res.status(500).json({ error: 'Error downloading file' });
+                }
+            }
+        });
 
     } catch (error) {
-        console.error('Error downloading guide:', error);
+        console.error('Error in download route:', error);
         res.status(500).json({
-            error: 'Failed to download guide'
+            error: 'Failed to download guide',
+            message: error.message
         });
     }
 });

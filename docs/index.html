@@ -589,7 +589,7 @@ nav.scrolled {
         }
         
         .service-card .price {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--peach);
             font-weight: 600;
             margin: 20px 0;
@@ -2798,22 +2798,42 @@ function showSuccessMessage(paymentId, downloadUrl) {
             </div>
             <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; color: #4CAF50;">Payment Successful!</h2>
             <p style="margin-bottom: 10px; color: var(--light-text);">Thank you for your purchase!</p>
-            <p style="margin-bottom: 20px; color: var(--light-text); font-size: 0.9rem;">Your guide has been sent to your email and is ready to download.</p>
+            <p style="margin-bottom: 20px; color: var(--light-text); font-size: 0.9rem;">Your guide is ready to download.</p>
             <p style="margin-bottom: 30px; font-size: 0.85rem; color: #999;">Payment ID: ${paymentId}</p>
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <a href="${API_BASE_URL}/download-guide/${paymentId}" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                <button id="downloadGuideBtn" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                     <i class="fas fa-download"></i> Download Guide
-                </a>
-                <button onclick="this.closest('div').parentElement.remove()" class="btn btn-secondary">Close</button>
+                </button>
+                <button onclick="this.closest('div').parentElement.parentElement.remove()" class="btn btn-secondary">Close</button>
             </div>
             <p style="margin-top: 30px; font-size: 0.85rem; color: #999;">
-                Check your email for the guide attachment.<br>
+                The guide has also been sent to your email.<br>
                 Need help? WhatsApp: +91 9654938428
             </p>
         </div>
     `;
     
     document.body.appendChild(successModal);
+    
+    // Add download button click handler
+    document.getElementById('downloadGuideBtn').addEventListener('click', function() {
+        // Trigger download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = `${API_BASE_URL}/download-guide/${paymentId}`;
+        downloadLink.download = 'Ultimate-Bridal-Makeup-Guide.pdf';
+        downloadLink.target = '_blank';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        // Show feedback
+        this.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
+        this.style.background = '#4CAF50';
+        setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-download"></i> Download Again';
+            this.style.background = '';
+        }, 2000);
+    });
     
     // Reset payment data
     currentPaymentData = null;
