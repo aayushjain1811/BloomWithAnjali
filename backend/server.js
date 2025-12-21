@@ -6,51 +6,31 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 require('dotenv').config();
 
+const app = express();
+
 // Middleware
 app.use(express.json());
 
-// CORS Configuration - FIXED VERSION
+// CORS Configuration
 app.use(cors({
-    origin: function(origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        
-        const allowedOrigins = [
-            'https://bloomwithanjli.netlify.app',
-            'http://localhost:5500',
-            'http://127.0.0.1:5500'
-        ];
-        
-        // Remove trailing slash if present
-        const cleanOrigin = origin.replace(/\/$/, '');
-        
-        if (allowedOrigins.some(allowed => cleanOrigin === allowed || cleanOrigin === allowed.replace(/\/$/, ''))) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: '*',
     methods: ['GET', 'POST', 'OPTIONS'],
-    credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
-    preflightContinue: false,
-    optionsSuccessStatus: 204
+    credentials: true
 }));
 
-// Handle preflight requests for all routes
+// Handle preflight requests
 app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    
     if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
-        res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-        res.header('Access-Control-Allow-Credentials', 'true');
-        return res.sendStatus(204);
+        return res.sendStatus(200);
     }
     next();
 });
-
-// Add preflight OPTIONS handler
-app.options('*', cors());
 
 // Serve static files from frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
@@ -82,7 +62,7 @@ app.get('/api/health', (req, res) => {
 // Create Razorpay Order
 app.post('/api/create-order', async (req, res) => {
     // Add CORS headers explicitly
-    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
     res.header('Access-Control-Allow-Credentials', 'true');
     
     try {
@@ -369,7 +349,7 @@ app.listen(PORT, () => {
 // Handle graceful shutdown
 process.on('SIGTERM', () => {
     console.log('SIGTERM signal received: closing HTTP server');
-    server.close(() => {
+    app.close(() => {
         console.log('HTTP server closed');
     });
 });
