@@ -11,10 +11,32 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: process.env.FRONTEND_URL || '*',
-    methods: ['GET', 'POST'],
-    credentials: true
+    origin: function(origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        const allowedOrigins = [
+            'https://bloomwithanjli.netlify.app',
+            'http://localhost:5500',
+            'http://127.0.0.1:5500'
+        ];
+        
+        // Remove trailing slash if present
+        const cleanOrigin = origin.replace(/\/$/, '');
+        
+        if (allowedOrigins.some(allowed => cleanOrigin === allowed || cleanOrigin === allowed.replace(/\/$/, ''))) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Add preflight OPTIONS handler
+app.options('*', cors());
 
 // Serve static files from frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
@@ -45,7 +67,15 @@ app.get('/api/health', (req, res) => {
 
 // Create Razorpay Order
 app.post('/api/create-order', async (req, res) => {
+    // Add CORS headers explicitly
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
+    
     try {
+        console.log('=== Create Order Request ===');
+        console.log('Origin:', req.headers.origin);
+        console.log('Body:', req.body);
+        
         const { amount, email } = req.body;
 
         // Validate request
