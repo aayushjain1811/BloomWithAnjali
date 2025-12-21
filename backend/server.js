@@ -50,22 +50,25 @@ app.use(cors({
     optionsSuccessStatus: 200
 }));
 
-// Handle preflight requests explicitly
-app.options('*', cors());
-
-// Handle preflight requests
+// Simple middleware to handle CORS for all routes
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
     
+    // Handle OPTIONS method
     if (req.method === 'OPTIONS') {
         return res.sendStatus(200);
     }
     next();
 });
 
+// Increase timeout for long-running requests
+app.use((req, res, next) => {
+    req.setTimeout(30000); // 30 seconds
+    res.setTimeout(30000);
+    next();
+});
 // Serve static files from frontend
 app.use(express.static(path.join(__dirname, '../docs')));
 
