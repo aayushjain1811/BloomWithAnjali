@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 // Serve static files from frontend
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../docs')));
 
 // Initialize Razorpay
 const razorpay = new Razorpay({
@@ -225,7 +225,7 @@ app.get('/api/download-guide/:paymentId', async (req, res) => {
         }
 
         // Serve the PDF file
-        const filePath = path.join(__dirname, '../frontend/guide/Makeupguide.pdf');
+        const filePath = path.join(__dirname, '../docs/guide/Makeupguide.pdf');
         
         console.log('Serving file from:', filePath);
         
@@ -359,7 +359,7 @@ async function sendGuideEmail(email, paymentId) {
         `,
         attachments: [{
             filename: 'Ultimate-Bridal-Makeup-Guide.pdf',
-            path: path.join(__dirname, '../frontend/guide/Makeupguide.pdf')
+            path: path.join(__dirname, '../docs/guide/Makeupguide.pdf')
         }]
     };
 
