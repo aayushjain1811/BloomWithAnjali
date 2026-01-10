@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         :root {
             --nude: #F5E9DE;
@@ -78,266 +77,268 @@
         }
         
         /* Loading Screen Styles */
-#loadingScreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--offwhite);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
-}
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--offwhite);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        }
 
-.loader-container {
-    text-align: center;
-    max-width: 400px;
-    padding: 40px;
-    animation: fadeInLoader 0.8s ease-out;
-}
+        .loader-container {
+            text-align: center;
+            max-width: 400px;
+            padding: 40px;
+            animation: fadeInLoader 0.8s ease-out;
+        }
 
-@keyframes fadeInLoader {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes fadeInLoader {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.loader-logo {
-    margin-bottom: 30px;
-    animation: pulse 2s infinite ease-in-out;
-}
+        .loader-logo {
+            margin-bottom: 30px;
+            animation: pulse 2s infinite ease-in-out;
+        }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.9; }
-}
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
 
-.loader-content h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    color: var(--dark-text);
-    margin-bottom: 5px;
-    opacity: 0;
-    animation: slideUpFade 0.5s forwards 0.3s;
-}
+        .loader-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+            opacity: 0;
+            animation: slideUpFade 0.5s forwards 0.3s;
+        }
 
-.loader-subtitle {
-    color: var(--peach);
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    opacity: 0;
-    animation: slideUpFade 0.5s forwards 0.5s;
-}
+        .loader-subtitle {
+            color: var(--peach);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: slideUpFade 0.5s forwards 0.5s;
+        }
 
-@keyframes slideUpFade {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.loader-progress {
-    width: 100%;
-    height: 3px;
-    background-color: rgba(232, 196, 196, 0.2);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-top: 30px;
-}
+        .loader-progress {
+            width: 100%;
+            height: 3px;
+            background-color: rgba(232, 196, 196, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
 
-.progress-bar {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--blush) 0%, var(--peach) 100%);
-    border-radius: 10px;
-    transition: width 5s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--blush) 0%, var(--peach) 100%);
+            border-radius: 10px;
+            transition: width 5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
 
-/* Loading complete animation */
-#loadingScreen.loaded {
-    opacity: 0;
-    visibility: hidden;
-}
+        /* Loading complete animation */
+        #loadingScreen.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-/* Prevent scroll during loading */
-body.loading {
-    overflow: hidden;
-    height: 100vh;
-}
+        /* Prevent scroll during loading */
+        body.loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+        
         /* Professional Navbar */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(250, 247, 245, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    padding: 20px 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
-    transition: var(--transition);
-}
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(250, 247, 245, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
 
-nav.scrolled {
-    padding: 15px 0;
-    box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
-}
+        nav.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+        }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--dark-text);
-    text-decoration: none;
-    transition: var(--transition);
-}
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--dark-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
 
-.nav-logo:hover {
-    color: var(--peach);
-}
+        .nav-logo:hover {
+            color: var(--peach);
+        }
 
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 40px;
-    align-items: center;
-}
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
 
-.nav-menu li a {
-    color: var(--dark-text);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: var(--transition);
-    position: relative;
-}
+        .nav-menu li a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
 
-.nav-menu li a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--peach);
-    transition: var(--transition);
-}
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--peach);
+            transition: var(--transition);
+        }
 
-.nav-menu li a:hover {
-    color: var(--peach);
-}
+        .nav-menu li a:hover {
+            color: var(--peach);
+        }
 
-.nav-menu li a:hover::after {
-    width: 100%;
-}
+        .nav-menu li a:hover::after {
+            width: 100%;
+        }
 
-.nav-cta {
-    background-color: var(--blush);
-    color: white !important;
-    padding: 10px 25px;
-    border-radius: 50px;
-    transition: var(--transition);
-}
+        .nav-cta {
+            background-color: var(--blush);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
 
-.nav-cta::after {
-    display: none;
-}
+        .nav-cta::after {
+            display: none;
+        }
 
-.nav-cta:hover {
-    background-color: var(--peach);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(232, 196, 196, 0.3);
-}
+        .nav-cta:hover {
+            background-color: var(--peach);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(232, 196, 196, 0.3);
+        }
 
-.nav-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-}
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
 
-.nav-toggle span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--dark-text);
-    transition: var(--transition);
-    border-radius: 3px;
-}
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark-text);
+            transition: var(--transition);
+            border-radius: 3px;
+        }
 
-.nav-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-}
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
 
-.nav-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
 
-.nav-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
 
-/* Mobile Nav Styles */
-@media (max-width: 992px) {
-    .nav-toggle {
-        display: flex;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        top: 80px;
-        right: -100%;
-        width: 300px;
-        height: calc(100vh - 80px);
-        background-color: var(--offwhite);
-        flex-direction: column;
-        padding: 40px 20px;
-        gap: 30px;
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
-        transition: var(--transition);
-        align-items: flex-start;
-    }
-    
-    .nav-menu.active {
-        right: 0;
-    }
-    
-    .nav-menu li {
-        width: 100%;
-    }
-    
-    .nav-menu li a {
-        display: block;
-        padding: 10px 0;
-        font-size: 1.1rem;
-    }
-    
-    .nav-cta {
-        width: 100%;
-        text-align: center;
-        display: block;
-    }
-}
+        /* Mobile Nav Styles */
+        @media (max-width: 992px) {
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 300px;
+                height: calc(100vh - 80px);
+                background-color: var(--offwhite);
+                flex-direction: column;
+                padding: 40px 20px;
+                gap: 30px;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                align-items: flex-start;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+            }
+            
+            .nav-menu li a {
+                display: block;
+                padding: 10px 0;
+                font-size: 1.1rem;
+            }
+            
+            .nav-cta {
+                width: 100%;
+                text-align: center;
+                display: block;
+            }
+        }
 
-@media (max-width: 768px) {
-    .nav-container {
-        padding: 0 20px;
-    }
-    
-    .nav-logo {
-        font-size: 1.5rem;
-    }
-}
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+            
+            .nav-logo {
+                font-size: 1.5rem;
+            }
+        }
+        
         /* Updated Hero Section with Photo on Left */
         #hero {
             min-height: 100vh;
@@ -756,74 +757,6 @@ nav.scrolled {
             background-color: var(--blush);
             color: white;
             transform: rotate(90deg) scale(1.1);
-        }
-        
-        /* Guides Section */
-        #guides {
-            background-color: var(--offwhite);
-        }
-        
-        .guides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .guide-card {
-            background-color: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        
-        .guide-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .guide-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .guide-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .guide-card:hover .guide-image img {
-            transform: scale(1.05);
-        }
-        
-        .guide-content {
-            padding: 25px;
-        }
-        
-        .guide-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .guide-content p {
-            color: var(--light-text);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-        
-        .guide-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-        
-        .guide-price span {
-            font-size: 1.5rem;
-            color: var(--peach);
-            font-weight: 600;
         }
         
         /* Updated Instagram Reels Section */
@@ -1262,7 +1195,6 @@ nav.scrolled {
         }
         
         .portfolio-item img,
-        .guide-image img,
         .reel-thumbnail {
             will-change: transform;
         }
@@ -1314,7 +1246,6 @@ nav.scrolled {
             }
             
             .portfolio-grid,
-            .guides-grid,
             .reels-grid {
                 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
@@ -1415,7 +1346,6 @@ nav.scrolled {
             
             .services-grid,
             .portfolio-grid,
-            .guides-grid,
             .reels-grid {
                 grid-template-columns: 1fr;
             }
@@ -1450,46 +1380,47 @@ nav.scrolled {
 </head>
 <body>
     <!-- Professional Loading Screen -->
-<div id="loadingScreen">
-    <div class="loader-container">
-        <div class="loader-logo">
-            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <path d="M40 0C17.92 0 0 17.92 0 40C0 62.08 17.92 80 40 80C62.08 80 80 62.08 80 40C80 17.92 62.08 0 40 0ZM40 72C22.36 72 8 57.64 8 40C8 22.36 22.36 8 40 8C57.64 8 72 22.36 72 40C72 57.64 57.64 72 40 72Z" fill="var(--blush)"/>
-                <path d="M40 16C26.76 16 16 26.76 16 40C16 53.24 26.76 64 40 64C53.24 64 64 53.24 64 40C64 26.76 53.24 16 40 16ZM44 52C44 52.56 43.56 53 43 53H37C36.44 53 36 52.56 36 52V44C36 43.44 36.44 43 37 43H43C43.56 43 44 43.44 44 44V52ZM44 36C44 36.56 43.56 37 43 37H37C36.44 37 36 36.56 36 36V28C36 27.44 36.44 27 37 27H43C43.56 27 44 27.44 44 28V36Z" fill="var(--peach)"/>
-            </svg>
-        </div>
-        <div class="loader-content">
-            <h2>Anjli Gupta</h2>
-            <p class="loader-subtitle">Luxury Makeup Artistry</p>
-            <div class="loader-progress">
-                <div class="progress-bar"></div>
+    <div id="loadingScreen">
+        <div class="loader-container">
+            <div class="loader-logo">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                    <path d="M40 0C17.92 0 0 17.92 0 40C0 62.08 17.92 80 40 80C62.08 80 80 62.08 80 40C80 17.92 62.08 0 40 0ZM40 72C22.36 72 8 57.64 8 40C8 22.36 22.36 8 40 8C57.64 8 72 22.36 72 40C72 57.64 57.64 72 40 72Z" fill="var(--blush)"/>
+                    <path d="M40 16C26.76 16 16 26.76 16 40C16 53.24 26.76 64 40 64C53.24 64 64 53.24 64 40C64 26.76 53.24 16 40 16ZM44 52C44 52.56 43.56 53 43 53H37C36.44 53 36 52.56 36 52V44C36 43.44 36.44 43 37 43H43C43.56 43 44 43.44 44 44V52ZM44 36C44 36.56 43.56 37 43 37H37C36.44 37 36 36.56 36 36V28C36 27.44 36.44 27 37 27H43C43.56 27 44 27.44 44 28V36Z" fill="var(--peach)"/>
+                </svg>
+            </div>
+            <div class="loader-content">
+                <h2>Anjli Gupta</h2>
+                <p class="loader-subtitle">Luxury Makeup Artistry</p>
+                <div class="loader-progress">
+                    <div class="progress-bar"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Professional Navbar -->
-<nav id="navbar">
-    <div class="nav-container">
-        <a href="#hero" class="nav-logo">Anjli Gupta</a>
-        
-        <ul class="nav-menu" id="navMenu">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#guides">Guides</a></li>
-            <li><a href="#reels">Reels</a></li>
-            <li><a href="#testimonials">Reviews</a></li>
-            <li><a href="#contact" class="nav-cta">Book Now</a></li>
-        </ul>
-        
-        <div class="nav-toggle" id="navToggle">
-            <span></span>
-            <span></span>
-            <span></span>
+    
+    <!-- Professional Navbar -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">Anjli Gupta</a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#reels">Reels</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact" class="nav-cta">Book Now</a></li>
+            </ul>
+            
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    
     <!-- Updated Hero Section with Photo on Left -->
     <section id="hero">
         <div class="hero-container">
@@ -1522,8 +1453,8 @@ nav.scrolled {
                 </div>
                 <div class="about-text">
                     <h2>Creating Beauty Through Artistry</h2>
-                    <p>I’m a certified and experienced makeup artist based in Delhi, passionate about enhancing natural beauty through customized makeup looks. With over 5 years of hands-on experience in bridal, editorial, mature skin, and party makeup, I ensure every client feels confident, radiant, and photo-ready.</p>
-                    <p>Freelance Makeup Artist | Delhi 5+ Years of Experience | Bridal | Expert Party I Editorial | Mature Skin </p>
+                    <p>I'm a certified and experienced makeup artist based in Delhi, passionate about enhancing natural beauty through customized makeup looks. With over 5 years of hands-on experience in bridal, editorial, mature skin, and party makeup, I ensure every client feels confident, radiant, and photo-ready.</p>
+                    <p>Freelance Makeup Artist | Delhi 5+ Years of Experience | Bridal | Expert Party I Editorial | Mature Skin</p>
                     <p>Certificate from Sheena Kaur Makeovers Academy (offline) & Shanmu, Neha Adhvik Mahajan, Shraddha Naik, Kriti Duggal, Pompy Hans, Aliya Baig, Sahil Malhotra, Bhumika Bahl (online).</p>
                 </div>
             </div>
@@ -1919,36 +1850,6 @@ nav.scrolled {
         </div>
     </div>
 
-<!-- Updated Guides Section with Razorpay Integration -->
-<section id="guides" class="fade-in">
-    <div class="container">
-        <h2 class="section-title">Makeup Guides</h2>
-        <p class="section-subtitle" style="text-align: center; margin-bottom: 50px; color: var(--light-text); max-width: 700px; margin-left: auto; margin-right: auto;">
-            Download my professionally crafted makeup guides to master techniques and create stunning looks at home.
-        </p>
-        
-        <div class="guides-grid">
-            <div class="guide-card">
-                <div class="guide-image">
-                    <img src="guide/1.jpg" alt="Bridal Makeup Guide">
-                </div>
-                <div class="guide-content">
-                    <h3>The Ultimate Bridal Guide</h3>
-                    <p>Complete step-by-step guide to achieving the perfect bridal look, from skincare prep to long-lasting makeup application.</p>
-                    <div class="guide-price">
-                        <span>&#8377; 999</span>
-                        <button class="btn btn-primary purchase-guide-btn" 
-                                data-amount="99900" 
-                                data-product="The Ultimate Bridal Guide">
-                            Purchase Guide
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
     <!-- Updated Instagram Reels Section - Images Only -->
     <section id="reels" class="fade-in">
         <div class="reels-container">
@@ -2200,676 +2101,416 @@ nav.scrolled {
             </div>
         </div>
     </footer>
-    <!-- Payment Modal -->
-<div id="paymentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 3000; justify-content: center; align-items: center;">
-    <div style="background: white; padding: 40px; border-radius: 15px; max-width: 500px; width: 90%; text-align: center; animation: modalFadeIn 0.3s ease-out;">
-        <h3 style="margin-bottom: 20px; font-family: 'Cormorant Garamond', serif; color: var(--dark-text);">Complete Your Purchase</h3>
-        <p style="margin-bottom: 30px; color: var(--light-text);">Enter your email to receive the guide after payment</p>
-        
-        <input type="email" id="customerEmail" placeholder="Your email address" 
-               style="width: 100%; padding: 15px; border: 1px solid var(--beige); border-radius: 8px; margin-bottom: 20px; font-size: 1rem; font-family: 'Inter', sans-serif;">
-        
-        <div style="display: flex; gap: 10px; justify-content: center;">
-            <button id="proceedPayment" class="btn btn-primary">Proceed to Payment</button>
-            <button id="cancelPayment" class="btn btn-secondary">Cancel</button>
-        </div>
-    </div>
-</div>
 
     <script>
-  // Portfolio Modal Data (images only)
-const portfolioImages = [
-    "portfolio/bridal/1.jpg",
-    "portfolio/bridal/2.jpg",
-    "portfolio/bridal/3.jpg",
-    "portfolio/bridal/4.jpg",
-    "portfolio/bridal/5.jpg",
-    "portfolio/bridal/6.jpg",
-    "portfolio/bridal/7.jpg",
-    "portfolio/engagement/1.jpg",
-    "portfolio/engagement/2.jpg",
-    "portfolio/haldimhendi/1.jpg",
-    "portfolio/haldimhendi/2.jpg",
-    "portfolio/haldimhendi/3.jpg",
-    "portfolio/mature/1.jpg",
-    "portfolio/mature/2.jpg",
-    "portfolio/mature/3.jpg",
-    "portfolio/mature/4.jpg",
-    "portfolio/mature/5.jpg",
-    "portfolio/mature/6.jpg",
-    "portfolio/mature/7.jpg",
-    "portfolio/party/1.jpg",
-    "portfolio/party/2.jpg",
-    "portfolio/party/3.jpg",
-    "portfolio/party/4.jpg",
-    "portfolio/party/5.jpg",
-    "portfolio/party/6.jpg",
-    "portfolio/party/7.jpg",
-    "portfolio/party/8.jpg",
-    "portfolio/party/9.jpg",
-    "portfolio/party/10.jpg",
-    "portfolio/party/11.jpg",
-    "portfolio/party/12.jpg",
-    "portfolio/party/13.jpg",
-    "portfolio/party/14.jpg",
-    "portfolio/party/15.jpg",
-    "portfolio/party/16.jpg",
-    "portfolio/party/17.jpg",
-    "portfolio/party/18.jpg",
-    "portfolio/party/19.jpg",
-    "portfolio/party/20.jpg",
-    "portfolio/party/21.jpg",
-    "portfolio/party/22.jpg"
-];
+        // Portfolio Modal Data (images only)
+        const portfolioImages = [
+            "portfolio/bridal/1.jpg",
+            "portfolio/bridal/2.jpg",
+            "portfolio/bridal/3.jpg",
+            "portfolio/bridal/4.jpg",
+            "portfolio/bridal/5.jpg",
+            "portfolio/bridal/6.jpg",
+            "portfolio/bridal/7.jpg",
+            "portfolio/engagement/1.jpg",
+            "portfolio/engagement/2.jpg",
+            "portfolio/haldimhendi/1.jpg",
+            "portfolio/haldimhendi/2.jpg",
+            "portfolio/haldimhendi/3.jpg",
+            "portfolio/mature/1.jpg",
+            "portfolio/mature/2.jpg",
+            "portfolio/mature/3.jpg",
+            "portfolio/mature/4.jpg",
+            "portfolio/mature/5.jpg",
+            "portfolio/mature/6.jpg",
+            "portfolio/mature/7.jpg",
+            "portfolio/party/1.jpg",
+            "portfolio/party/2.jpg",
+            "portfolio/party/3.jpg",
+            "portfolio/party/4.jpg",
+            "portfolio/party/5.jpg",
+            "portfolio/party/6.jpg",
+            "portfolio/party/7.jpg",
+            "portfolio/party/8.jpg",
+            "portfolio/party/9.jpg",
+            "portfolio/party/10.jpg",
+            "portfolio/party/11.jpg",
+            "portfolio/party/12.jpg",
+            "portfolio/party/13.jpg",
+            "portfolio/party/14.jpg",
+            "portfolio/party/15.jpg",
+            "portfolio/party/16.jpg",
+            "portfolio/party/17.jpg",
+            "portfolio/party/18.jpg",
+            "portfolio/party/19.jpg",
+            "portfolio/party/20.jpg",
+            "portfolio/party/21.jpg",
+            "portfolio/party/22.jpg"
+        ];
 
-// Reels data with Instagram embed URLs
-const reelsData = [
-    {
-        embedUrl: "https://www.instagram.com/reel/DL9ZIvizaMd/embed/",
-        instagramLink: "https://www.instagram.com/reel/DL9ZIvizaMd/?igsh=bDJraHRqMGFxdWVu"
-    },
-    {
-        embedUrl: "https://www.instagram.com/reel/DO21epCkc3Q/embed/",
-        instagramLink: "https://www.instagram.com/reel/DO21epCkc3Q/?igsh=ZTdueGNwZ2t6eHh4"
-    },
-    {
-        embedUrl: "https://www.instagram.com/reel/DRrA8FXEUFE/embed/",
-        instagramLink: "https://www.instagram.com/reel/DRrA8FXEUFE/?igsh=djN6ZnUzc2djdGJ3"
-    },
-    {
-        embedUrl: "https://www.instagram.com/reel/DGu2eX4pNvC/embed/",
-        instagramLink: "https://www.instagram.com/reel/DGu2eX4pNvC/?igsh=MTY0bHZxcGNibWprag=="
-    }
-];
-
-// Performance optimization - Defer non-critical JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    // Loading Screen Functionality
-    const loadingScreen = document.getElementById('loadingScreen');
-    const progressBar = document.querySelector('.progress-bar');
-    const body = document.body;
-    
-    // Start loading timer and animation
-    body.classList.add('loading');
-    
-    // Animate progress bar
-    setTimeout(() => {
-        progressBar.style.width = '100%';
-    }, 100);
-    
-    // Hide loading screen after 5 seconds
-    setTimeout(() => {
-        loadingScreen.classList.add('loaded');
-        body.classList.remove('loading');
-        
-        // Remove from DOM after animation completes
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-            
-            // Initialize rest of the functionality
-            initializePage();
-        }, 800);
-    }, 2500);
-    
-    // Function to initialize the rest of the page
-    function initializePage() {
-        // Initial fade-in animation
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeInOnScroll = function() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 50;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        };
-        
-        fadeInOnScroll();
-        // Navbar functionality
-const navbar = document.getElementById('navbar');
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// Mobile menu toggle
-navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
-    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
-});
-
-// Close mobile menu on window resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 992) {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-});
-        window.addEventListener('scroll', function() {
-            clearTimeout(window.scrollTimeout);
-            window.scrollTimeout = setTimeout(fadeInOnScroll, 100);
-        });
-        
-        // Testimonial carousel
-        const dots = document.querySelectorAll('.carousel-dot');
-        const slides = document.querySelectorAll('.testimonial-slide');
-        let currentSlide = 0;
-        
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
-        
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showSlide(index));
-        });
-        
-        // Auto-advance carousel (with pause on hover)
-        let carouselInterval;
-        const carouselContainer = document.querySelector('.testimonial-carousel');
-        
-        function startCarousel() {
-            carouselInterval = setInterval(() => {
-                showSlide(currentSlide + 1);
-            }, 4000);
-        }
-        
-        function stopCarousel() {
-            clearInterval(carouselInterval);
-        }
-        
-        startCarousel();
-        carouselContainer.addEventListener('mouseenter', stopCarousel);
-        carouselContainer.addEventListener('mouseleave', startCarousel);
-        
-        // WhatsApp Booking Form Submission
-        const bookingForm = document.getElementById('bookingForm');
-        bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const eventType = document.getElementById('event-type').value;
-            const eventDate = document.getElementById('event-date').value;
-            const eventLocation = document.getElementById('event-location').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            // Format date
-            const formattedDate = eventDate ? new Date(eventDate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }) : 'Not specified';
-            
-            // Create WhatsApp message
-            let whatsappMessage = `Hello Anjli! I would like to book a makeup appointment.%0A%0A`;
-            whatsappMessage += `*Name:* ${name}%0A`;
-            whatsappMessage += `*Phone:* ${phone}%0A`;
-            whatsappMessage += `*Service:* ${eventType}%0A`;
-            whatsappMessage += `*Date:* ${formattedDate}%0A`;
-            
-            if (eventLocation) {
-                whatsappMessage += `*Location:* ${eventLocation}%0A`;
+        // Reels data with Instagram embed URLs
+        const reelsData = [
+            {
+                embedUrl: "https://www.instagram.com/reel/DL9ZIvizaMd/embed/",
+                instagramLink: "https://www.instagram.com/reel/DL9ZIvizaMd/?igsh=bDJraHRqMGFxdWVu"
+            },
+            {
+                embedUrl: "https://www.instagram.com/reel/DO21epCkc3Q/embed/",
+                instagramLink: "https://www.instagram.com/reel/DO21epCkc3Q/?igsh=ZTdueGNwZ2t6eHh4"
+            },
+            {
+                embedUrl: "https://www.instagram.com/reel/DRrA8FXEUFE/embed/",
+                instagramLink: "https://www.instagram.com/reel/DRrA8FXEUFE/?igsh=djN6ZnUzc2djdGJ3"
+            },
+            {
+                embedUrl: "https://www.instagram.com/reel/DGu2eX4pNvC/embed/",
+                instagramLink: "https://www.instagram.com/reel/DGu2eX4pNvC/?igsh=MTY0bHZxcGNibWprag=="
             }
+        ];
+
+        // Performance optimization - Defer non-critical JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loading Screen Functionality
+            const loadingScreen = document.getElementById('loadingScreen');
+            const progressBar = document.querySelector('.progress-bar');
+            const body = document.body;
             
-            if (message) {
-                whatsappMessage += `*Details:* ${message}%0A`;
-            }
+            // Start loading timer and animation
+            body.classList.add('loading');
             
-            whatsappMessage += `%0A_Please confirm availability and pricing._`;
-            
-            // Create WhatsApp URL
-            const whatsappURL = `https://wa.me/9654938428?text=${whatsappMessage}`;
-            
-            // Open WhatsApp in new tab
-            window.open(whatsappURL, '_blank');
-            
-            // Show success message
-            alert(`Your booking request has been prepared! WhatsApp will open with your details. Please send the message to confirm your appointment.`);
-            
-            // Reset form after a delay
+            // Animate progress bar
             setTimeout(() => {
-                bookingForm.reset();
-            }, 1000);
-        });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+                progressBar.style.width = '100%';
+            }, 100);
+            
+            // Hide loading screen after 5 seconds
+            setTimeout(() => {
+                loadingScreen.classList.add('loaded');
+                body.classList.remove('loading');
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
+                // Remove from DOM after animation completes
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    
+                    // Initialize rest of the functionality
+                    initializePage();
+                }, 800);
+            }, 2500);
+            
+            // Function to initialize the rest of the page
+            function initializePage() {
+                // Initial fade-in animation
+                const fadeElements = document.querySelectorAll('.fade-in');
                 
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
+                const fadeInOnScroll = function() {
+                    fadeElements.forEach(element => {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const elementVisible = 50;
+                        
+                        if (elementTop < window.innerHeight - elementVisible) {
+                            element.classList.add('visible');
+                        }
+                    });
+                };
+                
+                fadeInOnScroll();
+                window.addEventListener('scroll', function() {
+                    clearTimeout(window.scrollTimeout);
+                    window.scrollTimeout = setTimeout(fadeInOnScroll, 100);
+                });
+                
+                // Navbar functionality
+                const navbar = document.getElementById('navbar');
+                const navToggle = document.getElementById('navToggle');
+                const navMenu = document.getElementById('navMenu');
+
+                // Navbar scroll effect
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                });
+
+                // Mobile menu toggle
+                navToggle.addEventListener('click', () => {
+                    navToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+                });
+
+                // Close mobile menu when clicking on a link
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                });
+
+                // Close mobile menu on window resize
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 992) {
+                        navToggle.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                
+                // Testimonial carousel
+                const dots = document.querySelectorAll('.carousel-dot');
+                const slides = document.querySelectorAll('.testimonial-slide');
+                let currentSlide = 0;
+                
+                function showSlide(n) {
+                    slides.forEach(slide => slide.classList.remove('active'));
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    
+                    currentSlide = (n + slides.length) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
+                }
+                
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => showSlide(index));
+                });
+                
+                // Auto-advance carousel (with pause on hover)
+                let carouselInterval;
+                const carouselContainer = document.querySelector('.testimonial-carousel');
+                
+                function startCarousel() {
+                    carouselInterval = setInterval(() => {
+                        showSlide(currentSlide + 1);
+                    }, 4000);
+                }
+                
+                function stopCarousel() {
+                    clearInterval(carouselInterval);
+                }
+                
+                startCarousel();
+                carouselContainer.addEventListener('mouseenter', stopCarousel);
+                carouselContainer.addEventListener('mouseleave', startCarousel);
+                
+                // WhatsApp Booking Form Submission
+                const bookingForm = document.getElementById('bookingForm');
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
+                    const eventType = document.getElementById('event-type').value;
+                    const eventDate = document.getElementById('event-date').value;
+                    const eventLocation = document.getElementById('event-location').value.trim();
+                    const message = document.getElementById('message').value.trim();
+                    
+                    // Format date
+                    const formattedDate = eventDate ? new Date(eventDate).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    }) : 'Not specified';
+                    
+                    // Create WhatsApp message
+                    let whatsappMessage = `Hello Anjli! I would like to book a makeup appointment.%0A%0A`;
+                    whatsappMessage += `*Name:* ${name}%0A`;
+                    whatsappMessage += `*Phone:* ${phone}%0A`;
+                    whatsappMessage += `*Service:* ${eventType}%0A`;
+                    whatsappMessage += `*Date:* ${formattedDate}%0A`;
+                    
+                    if (eventLocation) {
+                        whatsappMessage += `*Location:* ${eventLocation}%0A`;
+                    }
+                    
+                    if (message) {
+                        whatsappMessage += `*Details:* ${message}%0A`;
+                    }
+                    
+                    whatsappMessage += `%0A_Please confirm availability and pricing._`;
+                    
+                    // Create WhatsApp URL
+                    const whatsappURL = `https://wa.me/9654938428?text=${whatsappMessage}`;
+                    
+                    // Open WhatsApp in new tab
+                    window.open(whatsappURL, '_blank');
+                    
+                    // Show success message
+                    alert(`Your booking request has been prepared! WhatsApp will open with your details. Please send the message to confirm your appointment.`);
+                    
+                    // Reset form after a delay
+                    setTimeout(() => {
+                        bookingForm.reset();
+                    }, 1000);
+                });
+                
+                // Smooth scroll for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+                
+                // Portfolio Category Filtering
+                const categoryBtns = document.querySelectorAll('.category-btn');
+                const portfolioItemsElements = document.querySelectorAll('.portfolio-item');
+                
+                // Set initial active category and show only bridal items
+                let activeCategory = 'bridal';
+                
+                // Function to filter portfolio items
+                function filterPortfolio(category) {
+                    portfolioItemsElements.forEach(item => {
+                        const itemCategory = item.getAttribute('data-category');
+                        
+                        if (category === 'all' || itemCategory === category) {
+                            item.style.display = 'block';
+                            // Force reflow for animation
+                            void item.offsetWidth;
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'scale(1)';
+                            }, 10);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
                     });
                 }
-            });
-        });
-        
-        // Portfolio Category Filtering
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const portfolioItemsElements = document.querySelectorAll('.portfolio-item');
-        
-        // Set initial active category and show only bridal items
-        let activeCategory = 'bridal';
-        
-        // Function to filter portfolio items
-        function filterPortfolio(category) {
-            portfolioItemsElements.forEach(item => {
-                const itemCategory = item.getAttribute('data-category');
                 
-                if (category === 'all' || itemCategory === category) {
-                    item.style.display = 'block';
-                    // Force reflow for animation
-                    void item.offsetWidth;
+                // Initialize: Show only bridal items
+                filterPortfolio('bridal');
+                
+                categoryBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // Update active button
+                        categoryBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Update active category
+                        activeCategory = this.getAttribute('data-category');
+                        
+                        // Filter items
+                        filterPortfolio(activeCategory);
+                    });
+                });
+                
+                // Portfolio Modal (Image Only)
+                const portfolioModal = document.getElementById('portfolioModal');
+                const modalImage = document.getElementById('modalImage');
+                const closeModal = document.getElementById('closeModal');
+                
+                portfolioItemsElements.forEach((item, index) => {
+                    item.addEventListener('click', () => {
+                        if (index < portfolioImages.length) {
+                            // Set modal image
+                            modalImage.src = portfolioImages[index];
+                            modalImage.alt = "Makeup Portfolio Image";
+                            
+                            // Show modal
+                            portfolioModal.style.display = 'flex';
+                            document.body.style.overflow = 'hidden';
+                        }
+                    });
+                });
+                
+                // Close modal functions
+                closeModal.addEventListener('click', closePortfolioModal);
+                
+                portfolioModal.addEventListener('click', (e) => {
+                    if (e.target === portfolioModal) {
+                        closePortfolioModal();
+                    }
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && portfolioModal.style.display === 'flex') {
+                        closePortfolioModal();
+                    }
+                });
+                
+                function closePortfolioModal() {
+                    portfolioModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+                
+                // Instagram Reels Modal
+                const reelModal = document.getElementById('reelModal');
+                const reelEmbed = document.getElementById('reelEmbed');
+                const closeReelModal = document.getElementById('closeReelModal');
+                const reelItems = document.querySelectorAll('.reel-item');
+                
+                reelItems.forEach((reel, index) => {
+                    reel.addEventListener('click', () => {
+                        if (index < reelsData.length) {
+                            const reelData = reelsData[index];
+                            
+                            reelEmbed.src = reelData.embedUrl;
+                            
+                            reelModal.style.display = 'flex';
+                            document.body.style.overflow = 'hidden';
+                        }
+                    });
+                });
+                
+                // Close reel modal
+                closeReelModal.addEventListener('click', closeReelModalFunc);
+                
+                reelModal.addEventListener('click', (e) => {
+                    if (e.target === reelModal) {
+                        closeReelModalFunc();
+                    }
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && reelModal.style.display === 'flex') {
+                        closeReelModalFunc();
+                    }
+                });
+                
+                function closeReelModalFunc() {
+                    reelModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    reelEmbed.src = "about:blank";
+                }
+                
+                // Set minimum date for event date picker to today
+                const eventDateInput = document.getElementById('event-date');
+                const today = new Date().toISOString().split('T')[0];
+                eventDateInput.min = today;
+                
+                // Preload hero image for better performance
+                const heroImage = document.querySelector('.hero-image-wrapper img');
+                if (heroImage) {
+                    heroImage.setAttribute('loading', 'eager');
+                    heroImage.setAttribute('fetchpriority', 'high');
+                }
+                
+                // Performance optimization for images
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                    // Add small delay to prevent layout shift
                     setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
-        }
-        
-        // Initialize: Show only bridal items
-        filterPortfolio('bridal');
-        
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Update active button
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                
-                // Update active category
-                activeCategory = this.getAttribute('data-category');
-                
-                // Filter items
-                filterPortfolio(activeCategory);
-            });
-        });
-        
-        // Portfolio Modal (Image Only)
-        const portfolioModal = document.getElementById('portfolioModal');
-        const modalImage = document.getElementById('modalImage');
-        const closeModal = document.getElementById('closeModal');
-        
-        portfolioItemsElements.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                if (index < portfolioImages.length) {
-                    // Set modal image
-                    modalImage.src = portfolioImages[index];
-                    modalImage.alt = "Makeup Portfolio Image";
-                    
-                    // Show modal
-                    portfolioModal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-        });
-        
-        // Close modal functions
-        closeModal.addEventListener('click', closePortfolioModal);
-        
-        portfolioModal.addEventListener('click', (e) => {
-            if (e.target === portfolioModal) {
-                closePortfolioModal();
+                        img.style.opacity = '1';
+                    }, 100);
+                });
             }
         });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && portfolioModal.style.display === 'flex') {
-                closePortfolioModal();
-            }
-        });
-        
-        function closePortfolioModal() {
-            portfolioModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Instagram Reels Modal
-        const reelModal = document.getElementById('reelModal');
-        const reelEmbed = document.getElementById('reelEmbed');
-        const closeReelModal = document.getElementById('closeReelModal');
-        const reelItems = document.querySelectorAll('.reel-item');
-        
-        reelItems.forEach((reel, index) => {
-            reel.addEventListener('click', () => {
-                if (index < reelsData.length) {
-                    const reelData = reelsData[index];
-                    
-                    reelEmbed.src = reelData.embedUrl;
-                    
-                    reelModal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-        });
-        
-        // Close reel modal
-        closeReelModal.addEventListener('click', closeReelModalFunc);
-        
-        reelModal.addEventListener('click', (e) => {
-            if (e.target === reelModal) {
-                closeReelModalFunc();
-            }
-        });
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && reelModal.style.display === 'flex') {
-                closeReelModalFunc();
-            }
-        });
-        
-        function closeReelModalFunc() {
-            reelModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            reelEmbed.src = "about:blank";
-        }
-        
-        // Guide purchase buttons
-        document.querySelectorAll('.guide-card .btn-primary').forEach(button => {
-            button.addEventListener('click', function() {
-                const guideTitle = this.closest('.guide-card').querySelector('h3').textContent;
-            });
-        });
-        
-        // Set minimum date for event date picker to today
-        const eventDateInput = document.getElementById('event-date');
-        const today = new Date().toISOString().split('T')[0];
-        eventDateInput.min = today;
-        
-        // Preload hero image for better performance
-        const heroImage = document.querySelector('.hero-image-wrapper img');
-        if (heroImage) {
-            heroImage.setAttribute('loading', 'eager');
-            heroImage.setAttribute('fetchpriority', 'high');
-        }
-        
-        // Performance optimization for images
-        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-            // Add small delay to prevent layout shift
-            setTimeout(() => {
-                img.style.opacity = '1';
-            }, 100);
-        });
-    }
-});
-// Razorpay Configuration
-const RAZORPAY_KEY_ID = 'rzp_test_RseZbXZoVlXaT6'; // Replace with your Razorpay Key ID
-const API_BASE_URL = 'https://bloomwithanjali.onrender.com/api'; // Your backend URL
-
-// Payment Modal Elements
-const paymentModal = document.getElementById('paymentModal');
-const customerEmailInput = document.getElementById('customerEmail');
-const proceedPaymentBtn = document.getElementById('proceedPayment');
-const cancelPaymentBtn = document.getElementById('cancelPayment');
-
-let currentPaymentData = null;
-
-// Purchase Guide Button Click
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.purchase-guide-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            currentPaymentData = {
-                amount: this.getAttribute('data-amount'),
-                product: this.getAttribute('data-product')
-            };
-            
-            // Show payment modal
-            paymentModal.style.display = 'flex';
-            customerEmailInput.focus();
-        });
-    });
-});
-
-// Cancel Payment
-cancelPaymentBtn.addEventListener('click', () => {
-    paymentModal.style.display = 'none';
-    customerEmailInput.value = '';
-    currentPaymentData = null;
-});
-
-// Proceed to Payment
-proceedPaymentBtn.addEventListener('click', async () => {
-    const email = customerEmailInput.value.trim();
-    
-    // Validate email
-    if (!email || !isValidEmail(email)) {
-        alert('Please enter a valid email address');
-        return;
-    }
-    
-    // Disable button to prevent double clicks
-    proceedPaymentBtn.disabled = true;
-    proceedPaymentBtn.textContent = 'Processing...';
-    
-    try {
-        // Create order on backend
-        const orderResponse = await fetch(`${API_BASE_URL}/create-order`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                amount: currentPaymentData.amount,
-                email: email
-            })
-        });
-        
-        if (!orderResponse.ok) {
-            const errorData = await orderResponse.json();
-            throw new Error(errorData.error || 'Failed to create order');
-        }
-        
-        const order = await orderResponse.json();
-        
-        // Initialize Razorpay
-        const options = {
-            key: RAZORPAY_KEY_ID,
-            amount: order.amount,
-            currency: order.currency,
-            name: 'Anjli Gupta Makeup',
-            description: currentPaymentData.product,
-            image: 'images/Hero.jpg',
-            order_id: order.id,
-            prefill: {
-                email: email
-            },
-            theme: {
-                color: '#E8C4C4'
-            },
-            handler: function(response) {
-                // Payment successful
-                verifyPayment(response, email);
-            },
-            modal: {
-                ondismiss: function() {
-                    // Reset button
-                    proceedPaymentBtn.disabled = false;
-                    proceedPaymentBtn.textContent = 'Proceed to Payment';
-                    paymentModal.style.display = 'none';
-                }
-            }
-        };
-        
-        // Hide email modal
-        paymentModal.style.display = 'none';
-        
-        // Open Razorpay checkout
-        const razorpay = new Razorpay(options);
-        razorpay.open();
-        
-        // Handle payment failure
-        razorpay.on('payment.failed', function(response) {
-            alert('Payment failed: ' + response.error.description);
-            proceedPaymentBtn.disabled = false;
-            proceedPaymentBtn.textContent = 'Proceed to Payment';
-        });
-        
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Something went wrong: ' + error.message);
-        proceedPaymentBtn.disabled = false;
-        proceedPaymentBtn.textContent = 'Proceed to Payment';
-    }
-});
-
-// Verify Payment - With better error handling
-async function verifyPayment(paymentData, email) {
-    // Show success message immediately with loading state
-    showSuccessMessage(paymentData.razorpay_payment_id, null, true);
-    
-    try {
-        console.log('Verifying payment...', paymentData);
-        
-        const response = await fetch(`${API_BASE_URL}/api/verify-payment`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                razorpay_order_id: paymentData.razorpay_order_id,
-                razorpay_payment_id: paymentData.razorpay_payment_id,
-                razorpay_signature: paymentData.razorpay_signature,
-                email: email
-            })
-        });
-        
-        console.log('Response status:', response.status);
-        
-        if (!response.ok) {
-            throw new Error(`Server error: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        console.log('Verification result:', result);
-        
-        if (result.success) {
-            // Update the success modal with download button
-            updateSuccessModalWithDownload(result.payment_id);
-        } else {
-            // Still show download since payment was successful on Razorpay
-            console.warn('Backend verification failed, but payment was successful');
-            updateSuccessModalWithDownload(paymentData.razorpay_payment_id);
-        }
-    } catch (error) {
-        console.error('Verification error:', error);
-        // Don't fail - payment was successful, just enable download
-        console.log('Enabling download despite verification error');
-        updateSuccessModalWithDownload(paymentData.razorpay_payment_id);
-    } finally {
-        // Reset button state
-        proceedPaymentBtn.disabled = false;
-        proceedPaymentBtn.textContent = 'Proceed to Payment';
-    }
-}
-
-// Show Success Message and Download
-function showSuccessMessage(paymentId, downloadUrl) {
-    // Create success modal
-    const successModal = document.createElement('div');
-    successModal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 4000; display: flex; justify-content: center; align-items: center;';
-    
-    successModal.innerHTML = `
-        <div style="background: white; padding: 50px; border-radius: 15px; max-width: 500px; width: 90%; text-align: center; animation: modalFadeIn 0.3s ease-out;">
-            <div style="width: 80px; height: 80px; background: #4CAF50; border-radius: 50%; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-check" style="color: white; font-size: 40px;"></i>
-            </div>
-            <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 15px; color: #4CAF50;">Payment Successful!</h2>
-            <p style="margin-bottom: 10px; color: var(--light-text);">Thank you for your purchase!</p>
-            <p style="margin-bottom: 20px; color: var(--light-text); font-size: 0.9rem;">Your guide is ready to download.</p>
-            <p style="margin-bottom: 30px; font-size: 0.85rem; color: #999;">Payment ID: ${paymentId}</p>
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                <button id="downloadGuideBtn" class="btn btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-download"></i> Download Guide
-                </button>
-                <button onclick="this.closest('div').parentElement.parentElement.remove()" class="btn btn-secondary">Close</button>
-            </div>
-            <p style="margin-top: 30px; font-size: 0.85rem; color: #999;">
-                The guide has also been sent to your email.<br>
-                Need help? WhatsApp: +91 9654938428
-            </p>
-        </div>
-    `;
-    
-    document.body.appendChild(successModal);
-    
-    // Add download button click handler
-    document.getElementById('downloadGuideBtn').addEventListener('click', function() {
-        // Trigger download
-        const downloadLink = document.createElement('a');
-        downloadLink.href = `${API_BASE_URL}/download-guide/${paymentId}`;
-        downloadLink.download = 'Ultimate-Bridal-Makeup-Guide.pdf';
-        downloadLink.target = '_blank';
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        
-        // Show feedback
-        this.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
-        this.style.background = '#4CAF50';
-        setTimeout(() => {
-            this.innerHTML = '<i class="fas fa-download"></i> Download Again';
-            this.style.background = '';
-        }, 2000);
-    });
-    
-    // Reset payment data
-    currentPaymentData = null;
-    customerEmailInput.value = '';
-}
-
-// Email validation
-function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-// Close modals on Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        if (paymentModal.style.display === 'flex') {
-            cancelPaymentBtn.click();
-        }
-    }
-});
     </script>
 </body>
 </html>
