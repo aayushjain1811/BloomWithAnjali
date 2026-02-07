@@ -2626,6 +2626,7 @@ A beginner-friendly makeup guide to help you create natural, glowing looks for d
 // ============================================
 
 const BACKEND_URL = 'https://bloomwith-anjli-backend-i6kb.vercel.app';
+const RAZORPAY_KEY = 'rzp_test_RseZbXz0V1XaT6'; // Your Razorpay public key
 
 const buyGuideBtn = document.getElementById('buyGuideBtn');
 const paymentStatus = document.getElementById('paymentStatus');
@@ -2669,14 +2670,9 @@ buyGuideBtn.addEventListener('click', async function() {
         
         const orderData = await orderResponse.json();
         
-        // Check if we received the razorpay key from backend
-        if (!orderData.key) {
-            throw new Error('Razorpay key not configured on server');
-        }
-        
-        // Step 2: Open Razorpay checkout with key from backend
-        const options = {
-            key: orderData.key, // Using key from backend
+// Step 2: Open Razorpay checkout with your key
+const options = {
+            key: RAZORPAY_KEY, // Using your Razorpay key
             amount: orderData.amount,
             currency: orderData.currency,
             name: 'Bloom With Anjali',
