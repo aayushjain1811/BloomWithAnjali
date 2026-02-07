@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         :root {
             --nude: #F5E9DE;
@@ -605,6 +606,253 @@
             font-weight: 600;
             margin: 20px 0;
         }
+        /* Digital Guide Section Styles */
+.guide-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.guide-card {
+    background: linear-gradient(135deg, var(--offwhite) 0%, white 100%);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 0;
+    margin-bottom: 60px;
+    transition: var(--transition);
+}
+
+.guide-card:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.guide-image {
+    position: relative;
+    background: linear-gradient(135deg, var(--nude) 0%, var(--beige) 100%);
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.guide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.guide-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--blush);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(232, 196, 196, 0.4);
+}
+
+.guide-content {
+    padding: 40px;
+}
+
+.guide-content h3 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--dark-text);
+}
+
+.guide-description {
+    color: var(--light-text);
+    margin-bottom: 30px;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.guide-features {
+    margin-bottom: 30px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: var(--dark-text);
+}
+
+.feature-item i {
+    color: var(--peach);
+    font-size: 1.2rem;
+}
+
+.guide-pricing {
+    background-color: rgba(232, 196, 196, 0.1);
+    border-left: 4px solid var(--blush);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.price-tag {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.currency {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--peach);
+    margin-top: 8px;
+}
+
+.amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--dark-text);
+    line-height: 1;
+}
+
+.price-note {
+    color: var(--light-text);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.guide-buy-btn {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.guide-buy-btn:disabled {
+    background-color: var(--beige);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.guide-buy-btn:disabled:hover {
+    background-color: var(--beige);
+    box-shadow: none;
+}
+
+.payment-status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.payment-status.loading {
+    display: block;
+    background-color: #FFF9E6;
+    color: #8B6914;
+    border: 1px solid #FFE066;
+}
+
+.payment-status.success {
+    display: block;
+    background-color: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #66BB6A;
+}
+
+.payment-status.error {
+    display: block;
+    background-color: #FFEBEE;
+    color: #C62828;
+    border: 1px solid #EF5350;
+}
+
+/* FAQ Styles */
+.guide-faq {
+    background-color: var(--offwhite);
+    padding: 40px;
+    border-radius: var(--radius);
+    margin-bottom: 30px;
+}
+
+.faq-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.faq-question {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+    color: var(--dark-text);
+}
+
+.faq-question i {
+    color: var(--peach);
+    margin-top: 3px;
+    font-size: 1.1rem;
+}
+
+.faq-answer {
+    color: var(--light-text);
+    line-height: 1.7;
+    padding-left: 30px;
+}
+
+.guide-terms {
+    text-align: center;
+    color: var(--light-text);
+    font-size: 0.9rem;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .guide-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .guide-image {
+        min-height: 300px;
+    }
+    
+    .guide-content {
+        padding: 30px 20px;
+    }
+    
+    .guide-content h3 {
+        font-size: 1.7rem;
+    }
+    
+    .amount {
+        font-size: 2.8rem;
+    }
+    
+    .guide-faq {
+        padding: 25px 20px;
+    }
+}
         
         /* Updated Portfolio Section with Popup */
         #portfolio {
@@ -1414,6 +1662,7 @@
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#digital-guide">Digital Guide</a></li>                
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#reels">Reels</a></li>
                 <li><a href="#testimonials">Reviews</a></li>
@@ -1841,6 +2090,109 @@
             </div>
         </div>
     </section>
+    <!-- Digital Guide Section -->
+<section id="digital-guide" class="fade-in" style="background-color: white;">
+    <div class="container">
+        <h2 class="section-title">Digital Guide</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: var(--light-text);">
+            Unlock your beauty and confidence with our exclusive guide
+        </p>
+        
+        <div class="guide-container">
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="guide/1.jpg" alt="Manifestation Guide" onerror="this.src='images/about.jpg'">
+                    <div class="guide-badge">Digital Download</div>
+                </div>
+                
+                <div class="guide-content">
+                    <h3>Makeup Guide</h3>
+                    <p class="guide-description">
+A beginner-friendly makeup guide to help you create natural, glowing looks for daily wear and special occasions. Simple steps, easy techniques, and product tips tailored for Indian skin tones—so you can look confident without overdoing it.
+                    </p>
+                    
+                    <div class="guide-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>30+ Pages of Expert Content</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Professional Makeup Tips</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Instant PDF Download</span>
+                        </div>
+                    </div>
+                    
+                    <div class="guide-pricing">
+                        <div class="price-tag">
+                            <span class="currency">₹</span>
+                            <span class="amount">1</span>
+                        </div>
+                        <p class="price-note">One-time payment • Lifetime access</p>
+                    </div>
+                    
+                    <button id="buyGuideBtn" class="btn btn-primary guide-buy-btn">
+                        <i class="fas fa-shopping-cart"></i> Buy Now
+                    </button>
+                    
+                    <div id="paymentStatus" class="payment-status"></div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="guide-faq">
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 2rem;">Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <strong>How do I get the guide after payment?</strong>
+                    </div>
+                    <div class="faq-answer">
+                        After successful payment, you'll be automatically redirected to download your guide. 
+                        You'll also receive a download link via email.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <strong>What if my download doesn't work?</strong>
+                    </div>
+                    <div class="faq-answer">
+                        Contact us on WhatsApp at +91 9654938428 with your payment details, 
+                        and we'll resend the download link within 24 hours.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <strong>Do you offer refunds?</strong>
+                    </div>
+                    <div class="faq-answer">
+                        Due to the digital nature of this product, we do not offer refunds once the guide is downloaded. 
+                        Please review the description carefully before purchasing.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        <strong>Is the payment secure?</strong>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! All payments are processed securely through Razorpay, India's leading payment gateway. 
+                        We never store your card details.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Portfolio Modal Popup - Image Only -->
     <div class="portfolio-modal" id="portfolioModal">
@@ -2269,6 +2621,148 @@
                 dots.forEach((dot, index) => {
                     dot.addEventListener('click', () => showSlide(index));
                 });
+                // ============================================
+// RAZORPAY PAYMENT INTEGRATION
+// ============================================
+
+const BACKEND_URL = 'https://bloomwith-anjli-backend-i6kb.vercel.app';
+
+const buyGuideBtn = document.getElementById('buyGuideBtn');
+const paymentStatus = document.getElementById('paymentStatus');
+
+// Helper function to show status messages
+function showStatus(message, type) {
+    paymentStatus.textContent = message;
+    paymentStatus.className = 'payment-status ' + type;
+    paymentStatus.style.display = 'block';
+}
+
+// Helper function to hide status
+function hideStatus() {
+    paymentStatus.style.display = 'none';
+}
+
+// Main purchase handler
+buyGuideBtn.addEventListener('click', async function() {
+    try {
+        // Disable button and show loading
+        buyGuideBtn.disabled = true;
+        buyGuideBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        showStatus('Creating your order...', 'loading');
+        
+        // Step 1: Create Razorpay order (backend will return both order and key)
+        const orderResponse = await fetch(`${BACKEND_URL}/api/create-order`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: 499,
+                currency: 'INR'
+            })
+        });
+        
+        if (!orderResponse.ok) {
+            const errorData = await orderResponse.json();
+            throw new Error(errorData.error || 'Failed to create order');
+        }
+        
+        const orderData = await orderResponse.json();
+        
+        // Check if we received the razorpay key from backend
+        if (!orderData.key) {
+            throw new Error('Razorpay key not configured on server');
+        }
+        
+        // Step 2: Open Razorpay checkout with key from backend
+        const options = {
+            key: orderData.key, // Using key from backend
+            amount: orderData.amount,
+            currency: orderData.currency,
+            name: 'Bloom With Anjali',
+            description: 'Beauty & Confidence Manifestation Guide',
+            order_id: orderData.id,
+            image: 'images/about.jpg', // Your logo
+            
+            handler: async function (response) {
+                try {
+                    showStatus('Verifying payment...', 'loading');
+                    
+                    // Step 3: Verify payment
+                    const verifyResponse = await fetch(`${BACKEND_URL}/api/verify-payment`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature
+                        })
+                    });
+                    
+                    if (!verifyResponse.ok) {
+                        const errorData = await verifyResponse.json();
+                        throw new Error(errorData.error || 'Payment verification failed');
+                    }
+                    
+                    const verifyData = await verifyResponse.json();
+                    
+                    // Step 4: Show success and redirect to download
+                    showStatus('✓ Payment successful! Downloading your guide...', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = `${BACKEND_URL}/api/download?token=${verifyData.downloadToken}`;
+                        
+                        // Reset button after download starts
+                        setTimeout(() => {
+                            buyGuideBtn.disabled = false;
+                            buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
+                            hideStatus();
+                        }, 2000);
+                    }, 1500);
+                    
+                } catch (error) {
+                    console.error('Verification error:', error);
+                    showStatus('⚠ Payment verification failed. Please contact support on WhatsApp with your payment ID: ' + response.razorpay_payment_id, 'error');
+                    buyGuideBtn.disabled = false;
+                    buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
+                }
+            },
+            
+            prefill: {
+                name: '',
+                email: '',
+                contact: ''
+            },
+            
+            theme: {
+                color: '#dca1a1'
+            },
+            
+            modal: {
+                ondismiss: function() {
+                    // User closed the payment modal
+                    buyGuideBtn.disabled = false;
+                    buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
+                    showStatus('Payment cancelled', 'error');
+                    setTimeout(hideStatus, 3000);
+                }
+            }
+        };
+        
+        const razorpay = new Razorpay(options);
+        razorpay.open();
+        
+        hideStatus();
+        
+    } catch (error) {
+        console.error('Payment error:', error);
+        showStatus('⚠ ' + error.message + '. Please try again or contact us on WhatsApp.', 'error');
+        buyGuideBtn.disabled = false;
+        buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
+    }
+});
                 
                 // Auto-advance carousel (with pause on hover)
                 let carouselInterval;
