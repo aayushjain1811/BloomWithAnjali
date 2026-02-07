@@ -2709,7 +2709,7 @@ const options = {
                     showStatus('✓ Payment successful! Downloading your guide...', 'success');
                     
                     setTimeout(() => {
-                        window.location.href = `window.location.href = ${BACKEND_URL}/api/download?token=${verifyData.token}`;
+                        window.location.href = `${BACKEND_URL}/api/download?token=${verifyData.token}`;
                         
                         // Reset button after download starts
                         setTimeout(() => {
