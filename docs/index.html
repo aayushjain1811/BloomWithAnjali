@@ -2703,7 +2703,7 @@ A beginner-friendly makeup guide to help you create natural, glowing looks for d
                 const orderResponse = await fetch(`${BACKEND_URL}/api/create-order`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: 100, currency: 'INR' }) // 100 paise = ₹1
+                    body: JSON.stringify({ amount: 99900, currency: 'INR' }) // 100 paise = ₹1
                 });
 
                 if (!orderResponse.ok) {
