@@ -2449,553 +2449,374 @@ A beginner-friendly makeup guide to help you create natural, glowing looks for d
         </div>
     </footer>
 
-    <script>
-        // Portfolio Modal Data (images only)
-        const portfolioImages = [
-            "portfolio/bridal/1.jpg",
-            "portfolio/bridal/3.jpg",
-            "portfolio/bridal/4.jpg",
-            "portfolio/bridal/5.jpg",
-            "portfolio/bridal/6.jpg",
-            "portfolio/bridal/7.jpg",
-            "portfolio/engagement/1.jpg",
-            "portfolio/engagement/2.jpg",
-            "portfolio/haldimhendi/1.jpg",
-            "portfolio/haldimhendi/2.jpg",
-            "portfolio/haldimhendi/3.jpg",
-            "portfolio/mature/1.jpg",
-            "portfolio/mature/2.jpg",
-            "portfolio/mature/3.jpg",
-            "portfolio/mature/4.jpg",
-            "portfolio/mature/5.jpg",
-            "portfolio/mature/6.jpg",
-            "portfolio/mature/7.jpg",
-            "portfolio/party/1.jpg",
-            "portfolio/party/2.jpg",
-            "portfolio/party/3.jpg",
-            "portfolio/party/4.jpg",
-            "portfolio/party/5.jpg",
-            "portfolio/party/6.jpg",
-            "portfolio/party/7.jpg",
-            "portfolio/party/8.jpg",
-            "portfolio/party/9.jpg",
-            "portfolio/party/10.jpg",
-            "portfolio/party/11.jpg",
-            "portfolio/party/12.jpg",
-            "portfolio/party/13.jpg",
-            "portfolio/party/14.jpg",
-            "portfolio/party/15.jpg",
-            "portfolio/party/16.jpg",
-            "portfolio/party/17.jpg",
-            "portfolio/party/18.jpg",
-            "portfolio/party/19.jpg",
-            "portfolio/party/20.jpg",
-            "portfolio/party/21.jpg",
-            "portfolio/party/22.jpg"
-        ];
+<script>
+    // ============================================================
+    // DATA
+    // ============================================================
+    const portfolioImages = [
+        "portfolio/bridal/1.jpg","portfolio/bridal/3.jpg","portfolio/bridal/4.jpg",
+        "portfolio/bridal/5.jpg","portfolio/bridal/6.jpg","portfolio/bridal/7.jpg",
+        "portfolio/engagement/1.jpg","portfolio/engagement/2.jpg",
+        "portfolio/haldimhendi/1.jpg","portfolio/haldimhendi/2.jpg","portfolio/haldimhendi/3.jpg",
+        "portfolio/mature/1.jpg","portfolio/mature/2.jpg","portfolio/mature/3.jpg",
+        "portfolio/mature/4.jpg","portfolio/mature/5.jpg","portfolio/mature/6.jpg","portfolio/mature/7.jpg",
+        "portfolio/party/1.jpg","portfolio/party/2.jpg","portfolio/party/3.jpg","portfolio/party/4.jpg",
+        "portfolio/party/5.jpg","portfolio/party/6.jpg","portfolio/party/7.jpg","portfolio/party/8.jpg",
+        "portfolio/party/9.jpg","portfolio/party/10.jpg","portfolio/party/11.jpg","portfolio/party/12.jpg",
+        "portfolio/party/13.jpg","portfolio/party/14.jpg","portfolio/party/15.jpg","portfolio/party/16.jpg",
+        "portfolio/party/17.jpg","portfolio/party/18.jpg","portfolio/party/19.jpg","portfolio/party/20.jpg",
+        "portfolio/party/21.jpg","portfolio/party/22.jpg"
+    ];
 
-        // Reels data with Instagram embed URLs
-        const reelsData = [
-            {
-                embedUrl: "https://www.instagram.com/reel/DL9ZIvizaMd/embed/",
-                instagramLink: "https://www.instagram.com/reel/DL9ZIvizaMd/?igsh=bDJraHRqMGFxdWVu"
-            },
-            {
-                embedUrl: "https://www.instagram.com/reel/DO21epCkc3Q/embed/",
-                instagramLink: "https://www.instagram.com/reel/DO21epCkc3Q/?igsh=ZTdueGNwZ2t6eHh4"
-            },
-            {
-                embedUrl: "https://www.instagram.com/reel/DRrA8FXEUFE/embed/",
-                instagramLink: "https://www.instagram.com/reel/DRrA8FXEUFE/?igsh=djN6ZnUzc2djdGJ3"
-            },
-            {
-                embedUrl: "https://www.instagram.com/reel/DGu2eX4pNvC/embed/",
-                instagramLink: "https://www.instagram.com/reel/DGu2eX4pNvC/?igsh=MTY0bHZxcGNibWprag=="
-            }
-        ];
+    const reelsData = [
+        { embedUrl: "https://www.instagram.com/reel/DL9ZIvizaMd/embed/" },
+        { embedUrl: "https://www.instagram.com/reel/DO21epCkc3Q/embed/" },
+        { embedUrl: "https://www.instagram.com/reel/DRrA8FXEUFE/embed/" },
+        { embedUrl: "https://www.instagram.com/reel/DGu2eX4pNvC/embed/" }
+    ];
 
-        // Performance optimization - Defer non-critical JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
-            // Loading Screen Functionality
-            const loadingScreen = document.getElementById('loadingScreen');
-            const progressBar = document.querySelector('.progress-bar');
-            const body = document.body;
-            
-            // Start loading timer and animation
-            body.classList.add('loading');
-            
-            // Animate progress bar
+    // ============================================================
+    // PAYMENT CONFIG
+    // ============================================================
+    const BACKEND_URL = 'https://bloomwith-anjli-backend-i6kb.vercel.app';
+    const RAZORPAY_KEY = 'rzp_test_SDEfhyjer4OCjL';
+
+    // ============================================================
+    // PAGE INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function () {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const progressBar = document.querySelector('.progress-bar');
+        document.body.classList.add('loading');
+        setTimeout(() => { progressBar.style.width = '100%'; }, 100);
+        setTimeout(() => {
+            loadingScreen.classList.add('loaded');
+            document.body.classList.remove('loading');
             setTimeout(() => {
-                progressBar.style.width = '100%';
-            }, 100);
-            
-            // Hide loading screen after 5 seconds
-            setTimeout(() => {
-                loadingScreen.classList.add('loaded');
-                body.classList.remove('loading');
-                
-                // Remove from DOM after animation completes
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                    
-                    // Initialize rest of the functionality
-                    initializePage();
-                }, 800);
-            }, 2500);
-            
-            // Function to initialize the rest of the page
-            function initializePage() {
-                // Initial fade-in animation
-                const fadeElements = document.querySelectorAll('.fade-in');
-                
-                const fadeInOnScroll = function() {
-                    fadeElements.forEach(element => {
-                        const elementTop = element.getBoundingClientRect().top;
-                        const elementVisible = 50;
-                        
-                        if (elementTop < window.innerHeight - elementVisible) {
-                            element.classList.add('visible');
-                        }
-                    });
-                };
-                
-                fadeInOnScroll();
-                window.addEventListener('scroll', function() {
-                    clearTimeout(window.scrollTimeout);
-                    window.scrollTimeout = setTimeout(fadeInOnScroll, 100);
-                });
-                
-                // Navbar functionality
-                const navbar = document.getElementById('navbar');
-                const navToggle = document.getElementById('navToggle');
-                const navMenu = document.getElementById('navMenu');
+                loadingScreen.style.display = 'none';
+                initializePage();
+            }, 800);
+        }, 2500);
+    });
 
-                // Navbar scroll effect
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 50) {
-                        navbar.classList.add('scrolled');
-                    } else {
-                        navbar.classList.remove('scrolled');
-                    }
-                });
+    function initializePage() {
 
-                // Mobile menu toggle
-                navToggle.addEventListener('click', () => {
-                    navToggle.classList.toggle('active');
-                    navMenu.classList.toggle('active');
-                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
-                });
-
-                // Close mobile menu when clicking on a link
-                document.querySelectorAll('.nav-menu a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navToggle.classList.remove('active');
-                        navMenu.classList.remove('active');
-                        document.body.style.overflow = 'auto';
-                    });
-                });
-
-                // Close mobile menu on window resize
-                window.addEventListener('resize', () => {
-                    if (window.innerWidth > 992) {
-                        navToggle.classList.remove('active');
-                        navMenu.classList.remove('active');
-                        document.body.style.overflow = 'auto';
-                    }
-                });
-                
-                // Testimonial carousel
-                const dots = document.querySelectorAll('.carousel-dot');
-                const slides = document.querySelectorAll('.testimonial-slide');
-                let currentSlide = 0;
-                
-                function showSlide(n) {
-                    slides.forEach(slide => slide.classList.remove('active'));
-                    dots.forEach(dot => dot.classList.remove('active'));
-                    
-                    currentSlide = (n + slides.length) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                    dots[currentSlide].classList.add('active');
+        // ── Fade in on scroll ──────────────────────────────────
+        const fadeElements = document.querySelectorAll('.fade-in');
+        function fadeInOnScroll() {
+            fadeElements.forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 50) {
+                    el.classList.add('visible');
                 }
-                
-                dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => showSlide(index));
-                });
-                // ============================================
-// RAZORPAY PAYMENT INTEGRATION
-// ============================================
-
-const BACKEND_URL = 'https://bloomwith-anjli-backend-i6kb.vercel.app';
-const RAZORPAY_KEY = 'rzp_test_SDEfhyjer4OCjL'; // Your Razorpay public key
-
-
-const buyGuideBtn = document.getElementById('buyGuideBtn');
-const paymentStatus = document.getElementById('paymentStatus');
-
-// Helper function to show status messages
-function showStatus(message, type) {
-    paymentStatus.textContent = message;
-    paymentStatus.className = 'payment-status ' + type;
-    paymentStatus.style.display = 'block';
-}
-
-// Helper function to hide status
-function hideStatus() {
-    paymentStatus.style.display = 'none';
-}
-
-// Main purchase handler
-buyGuideBtn.addEventListener('click', async function() {
-    try {
-        // Disable button and show loading
-        buyGuideBtn.disabled = true;
-        buyGuideBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        showStatus('Creating your order...', 'loading');
-        
-        // Step 1: Create Razorpay order (backend will return both order and key)
-        const orderResponse = await fetch(`${BACKEND_URL}/api/create-order`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                amount: 499,
-                currency: 'INR'
-            })
-        });
-        
-        if (!orderResponse.ok) {
-            const errorData = await orderResponse.json();
-            throw new Error(errorData.error || 'Failed to create order');
+            });
         }
-        
-        const orderData = await orderResponse.json();
-        
-// Step 2: Open Razorpay checkout with your key
-const options = {
-            key: RAZORPAY_KEY, // Using your Razorpay key
-            amount: orderData.amount,
-            currency: orderData.currency,
-            name: 'Bloom With Anjali',
-            description: 'Beauty & Confidence Manifestation Guide',
-            order_id: orderData.id,
-            image: 'images/about.jpg', // Your logo
-            
-            handler: async function (response) {
-                try {
-                    showStatus('Verifying payment...', 'loading');
-                    
-                    // Step 3: Verify payment
-                    const verifyResponse = await fetch(`${BACKEND_URL}/api/verify-payment`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            razorpay_order_id: response.razorpay_order_id,
-                            razorpay_payment_id: response.razorpay_payment_id,
-                            razorpay_signature: response.razorpay_signature
-                        })
-                    });
-                    
-                    if (!verifyResponse.ok) {
-                        const errorData = await verifyResponse.json();
-                        throw new Error(errorData.error || 'Payment verification failed');
-                    }
-                    
-                    const verifyData = await verifyResponse.json();
-                    
-                    // Step 4: Show success and redirect to download
-                    showStatus('✓ Payment successful! Downloading your guide...', 'success');
-                    
-                    setTimeout(() => {
-                        window.location.href = `${BACKEND_URL}/api/download?token=${verifyData.token}`;
-                        
-                        // Reset button after download starts
-                        setTimeout(() => {
+        fadeInOnScroll();
+        window.addEventListener('scroll', () => {
+            clearTimeout(window.scrollTimeout);
+            window.scrollTimeout = setTimeout(fadeInOnScroll, 100);
+        });
+
+        // ── Navbar ─────────────────────────────────────────────
+        const navbar   = document.getElementById('navbar');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu   = document.getElementById('navMenu');
+
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // ── Smooth scroll ──────────────────────────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+            });
+        });
+
+        // ── Testimonial carousel ───────────────────────────────
+        const dots   = document.querySelectorAll('.carousel-dot');
+        const slides = document.querySelectorAll('.testimonial-slide');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+        dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+        let carouselInterval = setInterval(() => showSlide(currentSlide + 1), 4000);
+        const carouselContainer = document.querySelector('.testimonial-carousel');
+        carouselContainer.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+        carouselContainer.addEventListener('mouseleave', () => {
+            carouselInterval = setInterval(() => showSlide(currentSlide + 1), 4000);
+        });
+
+        // ── Portfolio filtering ────────────────────────────────
+        const categoryBtns           = document.querySelectorAll('.category-btn');
+        const portfolioItemsElements = document.querySelectorAll('.portfolio-item');
+
+        function filterPortfolio(category) {
+            portfolioItemsElements.forEach(item => {
+                const match = category === 'all' || item.getAttribute('data-category') === category;
+                if (match) {
+                    item.style.display = 'block';
+                    setTimeout(() => { item.style.opacity = '1'; item.style.transform = 'scale(1)'; }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => { item.style.display = 'none'; }, 300);
+                }
+            });
+        }
+        filterPortfolio('bridal');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterPortfolio(this.getAttribute('data-category'));
+            });
+        });
+
+        // ── Portfolio modal ────────────────────────────────────
+        const portfolioModal = document.getElementById('portfolioModal');
+        const modalImage     = document.getElementById('modalImage');
+        const closeModal     = document.getElementById('closeModal');
+
+        portfolioItemsElements.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgIndex = parseInt(item.getAttribute('data-index'));
+                if (imgIndex >= 0 && imgIndex < portfolioImages.length) {
+                    modalImage.src = portfolioImages[imgIndex];
+                    portfolioModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        function closePortfolioModal() {
+            portfolioModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        closeModal.addEventListener('click', closePortfolioModal);
+        portfolioModal.addEventListener('click', e => { if (e.target === portfolioModal) closePortfolioModal(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && portfolioModal.style.display === 'flex') closePortfolioModal();
+        });
+
+        // ── Reels modal ────────────────────────────────────────
+        const reelModal      = document.getElementById('reelModal');
+        const reelEmbed      = document.getElementById('reelEmbed');
+        const closeReelModal = document.getElementById('closeReelModal');
+
+        document.querySelectorAll('.reel-item').forEach((reel, index) => {
+            reel.addEventListener('click', () => {
+                if (index < reelsData.length) {
+                    reelEmbed.src = reelsData[index].embedUrl;
+                    reelModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+        function closeReelModalFunc() {
+            reelModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            reelEmbed.src = 'about:blank';
+        }
+        closeReelModal.addEventListener('click', closeReelModalFunc);
+        reelModal.addEventListener('click', e => { if (e.target === reelModal) closeReelModalFunc(); });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && reelModal.style.display === 'flex') closeReelModalFunc();
+        });
+
+        // ── Date picker min ────────────────────────────────────
+        document.getElementById('event-date').min = new Date().toISOString().split('T')[0];
+
+        // ── WhatsApp booking form ──────────────────────────────
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name          = document.getElementById('name').value.trim();
+            const phone         = document.getElementById('phone').value.trim();
+            const eventType     = document.getElementById('event-type').value;
+            const eventDate     = document.getElementById('event-date').value;
+            const eventLocation = document.getElementById('event-location').value.trim();
+            const message       = document.getElementById('message').value.trim();
+            const formattedDate = eventDate
+                ? new Date(eventDate).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' })
+                : 'Not specified';
+
+            let msg = `Hello Anjli! I would like to book a makeup appointment.%0A%0A`;
+            msg += `*Name:* ${name}%0A`;
+            msg += `*Phone:* ${phone}%0A`;
+            msg += `*Service:* ${eventType}%0A`;
+            msg += `*Date:* ${formattedDate}%0A`;
+            if (eventLocation) msg += `*Location:* ${eventLocation}%0A`;
+            if (message)       msg += `*Details:* ${message}%0A`;
+            msg += `%0A_Please confirm availability and pricing._`;
+
+            window.open(`https://wa.me/919654938428?text=${msg}`, '_blank');
+            alert('Your booking request has been prepared! Please send the WhatsApp message to confirm your appointment.');
+            setTimeout(() => { this.reset(); }, 1000);
+        });
+
+        // ============================================================
+        // RAZORPAY PAYMENT — COMPLETE & FIXED
+        // ============================================================
+        const buyGuideBtn  = document.getElementById('buyGuideBtn');
+        const paymentStatus = document.getElementById('paymentStatus');
+
+        function showStatus(message, type) {
+            paymentStatus.textContent = message;
+            paymentStatus.className   = 'payment-status ' + type;
+            paymentStatus.style.display = 'block';
+        }
+        function hideStatus() { paymentStatus.style.display = 'none'; }
+
+        buyGuideBtn.addEventListener('click', async function () {
+            try {
+                // Disable button
+                buyGuideBtn.disabled = true;
+                buyGuideBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                showStatus('Creating your order...', 'loading');
+
+                // ── Step 1: Create order on backend ───────────
+                const orderResponse = await fetch(`${BACKEND_URL}/api/create-order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount: 100, currency: 'INR' }) // 100 paise = ₹1
+                });
+
+                if (!orderResponse.ok) {
+                    const err = await orderResponse.json();
+                    throw new Error(err.error || 'Failed to create order');
+                }
+
+                const orderData = await orderResponse.json();
+
+                // ── Step 2: Open Razorpay checkout ────────────
+                const options = {
+                    key:         RAZORPAY_KEY,
+                    amount:      orderData.amount,
+                    currency:    orderData.currency,
+                    name:        'Bloom With Anjali',
+                    description: 'Makeup Guide - Digital PDF',
+                    order_id:    orderData.id,
+                    image:       'images/about.jpg',
+
+                    // ── Step 3: After payment success ─────────
+                    handler: async function (response) {
+                        try {
+                            showStatus('Verifying payment...', 'loading');
+
+                            const verifyResponse = await fetch(`${BACKEND_URL}/api/verify-payment`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    razorpay_order_id:   response.razorpay_order_id,
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_signature:  response.razorpay_signature
+                                })
+                            });
+
+                            if (!verifyResponse.ok) {
+                                const err = await verifyResponse.json();
+                                throw new Error(err.error || 'Payment verification failed');
+                            }
+
+                            const verifyData = await verifyResponse.json();
+
+                            // ── Step 4: Download PDF ───────────
+                            showStatus('✓ Payment successful! Downloading your guide...', 'success');
+
+                            setTimeout(async () => {
+                                try {
+                                    const downloadResponse = await fetch(
+                                        `${BACKEND_URL}/api/download?token=${verifyData.token}`
+                                    );
+                                    if (!downloadResponse.ok) throw new Error('Download failed');
+
+                                    const blob = await downloadResponse.blob();
+                                    const url  = URL.createObjectURL(blob);
+                                    const a    = document.createElement('a');
+                                    a.href     = url;
+                                    a.download = 'Makeupguide.pdf';
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a);
+                                    URL.revokeObjectURL(url);
+
+                                    buyGuideBtn.disabled = false;
+                                    buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
+                                    setTimeout(hideStatus, 3000);
+
+                                } catch (dlErr) {
+                                    showStatus(
+                                        '⚠ Download failed. Contact us on WhatsApp with payment ID: '
+                                        + response.razorpay_payment_id,
+                                        'error'
+                                    );
+                                    buyGuideBtn.disabled = false;
+                                    buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
+                                }
+                            }, 1500);
+
+                        } catch (verifyErr) {
+                            console.error('Verification error:', verifyErr);
+                            showStatus(
+                                '⚠ Verification failed. Contact us on WhatsApp with payment ID: '
+                                + response.razorpay_payment_id,
+                                'error'
+                            );
                             buyGuideBtn.disabled = false;
                             buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
-                            hideStatus();
-                        }, 2000);
-                    }, 1500);
-                    
-                } catch (error) {
-                    console.error('Verification error:', error);
-                    showStatus('⚠ Payment verification failed. Please contact support on WhatsApp with your payment ID: ' + response.razorpay_payment_id, 'error');
-                    buyGuideBtn.disabled = false;
-                    buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
-                }
-            },
-            
-            prefill: {
-                name: '',
-                email: '',
-                contact: ''
-            },
-            
-            theme: {
-                color: '#dca1a1'
-            },
-            
-            modal: {
-                ondismiss: function() {
-                    // User closed the payment modal
-                    buyGuideBtn.disabled = false;
-                    buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
-                    showStatus('Payment cancelled', 'error');
-                    setTimeout(hideStatus, 3000);
-                }
-            }
-        };
-        
-        const razorpay = new Razorpay(options);
-        razorpay.open();
-        
-        hideStatus();
-        
-    } catch (error) {
-        console.error('Payment error:', error);
-        showStatus('⚠ ' + error.message + '. Please try again or contact us on WhatsApp.', 'error');
-        buyGuideBtn.disabled = false;
-        buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
-    }
-});
-                
-                // Auto-advance carousel (with pause on hover)
-                let carouselInterval;
-                const carouselContainer = document.querySelector('.testimonial-carousel');
-                
-                function startCarousel() {
-                    carouselInterval = setInterval(() => {
-                        showSlide(currentSlide + 1);
-                    }, 4000);
-                }
-                
-                function stopCarousel() {
-                    clearInterval(carouselInterval);
-                }
-                
-                startCarousel();
-                carouselContainer.addEventListener('mouseenter', stopCarousel);
-                carouselContainer.addEventListener('mouseleave', startCarousel);
-                
-                // WhatsApp Booking Form Submission
-                const bookingForm = document.getElementById('bookingForm');
-                bookingForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form values
-                    const name = document.getElementById('name').value.trim();
-                    const phone = document.getElementById('phone').value.trim();
-                    const eventType = document.getElementById('event-type').value;
-                    const eventDate = document.getElementById('event-date').value;
-                    const eventLocation = document.getElementById('event-location').value.trim();
-                    const message = document.getElementById('message').value.trim();
-                    
-                    // Format date
-                    const formattedDate = eventDate ? new Date(eventDate).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    }) : 'Not specified';
-                    
-                    // Create WhatsApp message
-                    let whatsappMessage = `Hello Anjli! I would like to book a makeup appointment.%0A%0A`;
-                    whatsappMessage += `*Name:* ${name}%0A`;
-                    whatsappMessage += `*Phone:* ${phone}%0A`;
-                    whatsappMessage += `*Service:* ${eventType}%0A`;
-                    whatsappMessage += `*Date:* ${formattedDate}%0A`;
-                    
-                    if (eventLocation) {
-                        whatsappMessage += `*Location:* ${eventLocation}%0A`;
-                    }
-                    
-                    if (message) {
-                        whatsappMessage += `*Details:* ${message}%0A`;
-                    }
-                    
-                    whatsappMessage += `%0A_Please confirm availability and pricing._`;
-                    
-                    // Create WhatsApp URL
-                    const whatsappURL = `https://wa.me/9654938428?text=${whatsappMessage}`;
-                    
-                    // Open WhatsApp in new tab
-                    window.open(whatsappURL, '_blank');
-                    
-                    // Show success message
-                    alert(`Your booking request has been prepared! WhatsApp will open with your details. Please send the message to confirm your appointment.`);
-                    
-                    // Reset form after a delay
-                    setTimeout(() => {
-                        bookingForm.reset();
-                    }, 1000);
-                });
-                
-                // Smooth scroll for anchor links
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                    anchor.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        
-                        const targetId = this.getAttribute('href');
-                        if (targetId === '#') return;
-                        
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
                         }
-                    });
-                });
-                
-                // Portfolio Category Filtering
-                const categoryBtns = document.querySelectorAll('.category-btn');
-                const portfolioItemsElements = document.querySelectorAll('.portfolio-item');
-                
-                // Set initial active category and show only bridal items
-                let activeCategory = 'bridal';
-                
-                // Function to filter portfolio items
-                function filterPortfolio(category) {
-                    portfolioItemsElements.forEach(item => {
-                        const itemCategory = item.getAttribute('data-category');
-                        
-                        if (category === 'all' || itemCategory === category) {
-                            item.style.display = 'block';
-                            // Force reflow for animation
-                            void item.offsetWidth;
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'scale(1)';
-                            }, 10);
-                        } else {
-                            item.style.opacity = '0';
-                            item.style.transform = 'scale(0.95)';
-                            setTimeout(() => {
-                                item.style.display = 'none';
-                            }, 300);
+                    }, // ← handler ends here
+
+                    prefill: { name: '', email: '', contact: '' },
+                    theme:   { color: '#dca1a1' },
+                    modal: {
+                        ondismiss: function () {
+                            buyGuideBtn.disabled = false;
+                            buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
+                            showStatus('Payment cancelled', 'error');
+                            setTimeout(hideStatus, 3000);
                         }
-                    });
-                }
-                
-                // Initialize: Show only bridal items
-                filterPortfolio('bridal');
-                
-                categoryBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // Update active button
-                        categoryBtns.forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // Update active category
-                        activeCategory = this.getAttribute('data-category');
-                        
-                        // Filter items
-                        filterPortfolio(activeCategory);
-                    });
-                });
-                
-                // Portfolio Modal (Image Only)
-                const portfolioModal = document.getElementById('portfolioModal');
-                const modalImage = document.getElementById('modalImage');
-                const closeModal = document.getElementById('closeModal');
-                
-                portfolioItemsElements.forEach((item, index) => {
-                    item.addEventListener('click', () => {
-                        if (index < portfolioImages.length) {
-                            // Set modal image
-                            modalImage.src = portfolioImages[index];
-                            modalImage.alt = "Makeup Portfolio Image";
-                            
-                            // Show modal
-                            portfolioModal.style.display = 'flex';
-                            document.body.style.overflow = 'hidden';
-                        }
-                    });
-                });
-                
-                // Close modal functions
-                closeModal.addEventListener('click', closePortfolioModal);
-                
-                portfolioModal.addEventListener('click', (e) => {
-                    if (e.target === portfolioModal) {
-                        closePortfolioModal();
                     }
-                });
-                
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && portfolioModal.style.display === 'flex') {
-                        closePortfolioModal();
-                    }
-                });
-                
-                function closePortfolioModal() {
-                    portfolioModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-                
-                // Instagram Reels Modal
-                const reelModal = document.getElementById('reelModal');
-                const reelEmbed = document.getElementById('reelEmbed');
-                const closeReelModal = document.getElementById('closeReelModal');
-                const reelItems = document.querySelectorAll('.reel-item');
-                
-                reelItems.forEach((reel, index) => {
-                    reel.addEventListener('click', () => {
-                        if (index < reelsData.length) {
-                            const reelData = reelsData[index];
-                            
-                            reelEmbed.src = reelData.embedUrl;
-                            
-                            reelModal.style.display = 'flex';
-                            document.body.style.overflow = 'hidden';
-                        }
-                    });
-                });
-                
-                // Close reel modal
-                closeReelModal.addEventListener('click', closeReelModalFunc);
-                
-                reelModal.addEventListener('click', (e) => {
-                    if (e.target === reelModal) {
-                        closeReelModalFunc();
-                    }
-                });
-                
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && reelModal.style.display === 'flex') {
-                        closeReelModalFunc();
-                    }
-                });
-                
-                function closeReelModalFunc() {
-                    reelModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                    reelEmbed.src = "about:blank";
-                }
-                
-                // Set minimum date for event date picker to today
-                const eventDateInput = document.getElementById('event-date');
-                const today = new Date().toISOString().split('T')[0];
-                eventDateInput.min = today;
-                
-                // Preload hero image for better performance
-                const heroImage = document.querySelector('.hero-image-wrapper img');
-                if (heroImage) {
-                    heroImage.setAttribute('loading', 'eager');
-                    heroImage.setAttribute('fetchpriority', 'high');
-                }
-                
-                // Performance optimization for images
-                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-                    // Add small delay to prevent layout shift
-                    setTimeout(() => {
-                        img.style.opacity = '1';
-                    }, 100);
-                });
+                }; // ← options ends here
+
+                const razorpay = new Razorpay(options);
+                razorpay.open();
+                hideStatus();
+
+            } catch (error) {
+                console.error('Payment error:', error);
+                showStatus('⚠ ' + error.message + '. Please try again or contact us on WhatsApp.', 'error');
+                buyGuideBtn.disabled = false;
+                buyGuideBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Buy Now';
             }
         });
-    </script>
+
+    } // ← initializePage ends here
+</script>
 </body>
 </html>
